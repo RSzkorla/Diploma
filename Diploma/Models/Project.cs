@@ -12,7 +12,7 @@ namespace Diploma.Models
     public DateTime DeadLine { get; set; }
     public DateTime EndDate { get; set; }
     public Promo Promo { get; set; }
-    public List<ProjectTask> ListOfProjectTasks { get; set; }
+    public virtual List<ProjectTask> ListOfProjectTasks { get; set; }
 
 
   }
