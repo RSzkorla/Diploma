@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
-
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
     <title>@ViewBag.Title - Diploma</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -26,7 +26,7 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
-                <form class="form-inline">
+                <form class="form-inline navbar-login">
                     <div class="form-group">
                         <input type="text" class="form-control" id="lastnameField" placeholder="Twój email" />
                     </div>
@@ -40,10 +40,15 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Diploma DevTeam</p>
-        </footer>
+
     </div>
+    <footer>
+        <ul>
+            <li><a>Kontakt</a></li>
+            <li><a>Regulamin</a></li>
+        </ul>
+        <p>&copy; @DateTime.Now.Year - Diploma DevTeam</p>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
