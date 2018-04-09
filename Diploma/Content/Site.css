@@ -1,12 +1,16 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #e3e4e5;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Open Sans', sans-serif;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 16px;
+    padding-right: 16px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -21,4 +25,46 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+.features {
+    display: block;
+    text-align: center;
+    padding-bottom: 16px;
+}
+
+.features h3 {
+    margin: 0 auto 16px;
+}
+
+.features .glyphicon{
+    font-size: 50px
+}
+
+.coaching {
+    padding-bottom: 32px;
+}
+.coaching h3 {
+    text-align: center;
+}
+.coaching img {
+    width: 100%;
+    height: auto;
+}
+
+footer {
+    background-color: #323335;
+    color: #fff;
+}
+
+footer ul {
+    list-style:none;
+}
+footer ul li a {
+    cursor: pointer;
+}
+footer ul li a:hover {
+    text-decoration: none;
+}
+footer p {
+    margin:0;
 }
