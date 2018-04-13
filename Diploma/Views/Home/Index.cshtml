@@ -21,7 +21,7 @@
     <h3>Lorem ipsum tu będzie super header</h3>
     <div class="row">
         <div class="col-md-6">
-            <img src="~/Images/study.jpg" alt="Study Person"/>
+            <img src="~/Images/study.jpg" alt="Study Person" />
         </div>
         <div class="col-md-6">
             <p>Lorem ipsum dolor sit amet, cadipisicing  sit amet, consectetur adipisicing elit. Atque sed, quidem quis praesentium, ut unde fuga error commodi architecto, oribus omnis minus temporibus perferendis nesciunt quam repellendus nulla nemo ipsum odit corrupti consequuntur possimus, vero mollitia velit ad consectetur. Alias, laborum excepturi nihil autem nemo numquam, ipsa architecto non, magni consequuntlaudantium culpa tenetur at id, beatae pet.</p>
@@ -37,29 +37,34 @@
     </div>
 </section>
 
-<section id="register">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-4">
-            <form class="form-horizontal row">
-                <!--TODO beginform?-->
-                <div class="form-group">
-                    <label for="nameField" class="col-xs-2">Imię</label>
-                    <input type="text" class="form-control" id="nameField" placeholder="Twoje imię" />
-                </div>
-                <div class="form-group">
-                    <label for="lastnameField" class="col-xs-2">Nazwisko</label>
-                    <input type="text" class="form-control" id="lastnameField" placeholder="Twoje nazwisko" />
-                </div>
-                <div class="form-group">
-                    <label for="emailField" class="col-xs-2">Email</label>
-                    <input type="text" class="form-control" id="lastnameField" placeholder="Twój email" />
-                </div>
-                <div class="form-group">
-                    <label for="passwordField" class="col-xs-2">Hasło</label>
-                    <input type="password" class="form-control" id="passwordField" placeholder="Twój e-mail" />
-                </div>
-                <button type="submit" class="btn btn-primary">Wyślij</button>
-            </form>
+<h1>@ViewBag.TwojeImie</h1>
+@using (@Html.BeginForm("RegisterUser", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <section id="register">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-4">
+                <form class="form-horizontal row">
+                    <!--TODO beginform?-->
+                    <div class="form-group">
+                        <label for="FirstName" class="col-xs-2">Imię</label>
+                        <input type="text" class="form-control" id="FirstName" name="FirstName" placeholder="Twoje imię" />
+                    </div>
+                    <div class="form-group">
+                        <label for="LastName" class="col-xs-2">Nazwisko</label>
+                        <input type="text" class="form-control" id="LastName" name="LastName" placeholder="Twoje nazwisko" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Email" class="col-xs-2">Email</label>
+                        <input type="email" class="form-control" id="Email" name="Email" placeholder="Twój email" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Password" class="col-xs-2">Hasło</label>
+                        <input type="password" class="form-control" id="Password" name="Password" placeholder="Twój e-mail" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Wyślij</button>
+                </form>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+}
