@@ -211,13 +211,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804130853092_InitialCreate.cs" />
-    <Compile Include="Migrations\201804130853092_InitialCreate.Designer.cs">
-      <DependentUpon>201804130853092_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201804132148370_Initial.cs" />
+    <Compile Include="Migrations\201804132148370_Initial.Designer.cs">
+      <DependentUpon>201804132148370_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804131814228_Initial.cs" />
-    <Compile Include="Migrations\201804131814228_Initial.Designer.cs">
-      <DependentUpon>201804131814228_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201804132149398_AddEmailActivated.cs" />
+    <Compile Include="Migrations\201804132149398_AddEmailActivated.Designer.cs">
+      <DependentUpon>201804132149398_AddEmailActivated.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Project.cs" />
@@ -286,11 +286,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804130853092_InitialCreate.resx">
-      <DependentUpon>201804130853092_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804132148370_Initial.resx">
+      <DependentUpon>201804132148370_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804131814228_Initial.resx">
-      <DependentUpon>201804131814228_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804132149398_AddEmailActivated.resx">
+      <DependentUpon>201804132149398_AddEmailActivated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
