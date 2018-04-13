@@ -39,8 +39,9 @@ section {
 section:last-of-type {
     border-bottom: none;
 }
-    section:last-of-type form {
-        text-align: center;
+    section:last-of-type .form-signin {
+        max-width: 400px;
+        margin: 0 auto;
     }
 .slider {
     background-image: url("/Images/slider.jpg");
