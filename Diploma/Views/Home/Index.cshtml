@@ -38,24 +38,28 @@
 </section>
 
 <section id="register">
-    <fieldset>
-        <div class="form-inline">
-            <label for="nameField">Imię</label>
-            <input type="text" class="form-control" id="nameField" placeholder="Twoje imię" />
+    <div class="row">
+        <div class="col-md-6 col-md-offset-4">
+            <form class="form-horizontal row">
+                <!--TODO beginform?-->
+                <div class="form-group">
+                    <label for="nameField" class="col-xs-2">Imię</label>
+                    <input type="text" class="form-control" id="nameField" placeholder="Twoje imię" />
+                </div>
+                <div class="form-group">
+                    <label for="lastnameField" class="col-xs-2">Nazwisko</label>
+                    <input type="text" class="form-control" id="lastnameField" placeholder="Twoje nazwisko" />
+                </div>
+                <div class="form-group">
+                    <label for="emailField" class="col-xs-2">Email</label>
+                    <input type="text" class="form-control" id="lastnameField" placeholder="Twój email" />
+                </div>
+                <div class="form-group">
+                    <label for="passwordField" class="col-xs-2">Hasło</label>
+                    <input type="password" class="form-control" id="passwordField" placeholder="Twój e-mail" />
+                </div>
+                <button type="submit" class="btn btn-primary">Wyślij</button>
+            </form>
         </div>
-        <div class="form-inline">
-            <label for="lastnameField">Nazwisko</label>
-            <input type="text" class="form-control" id="lastnameField" placeholder="Twoje nazwisko" />
-        </div>
-        <div class="form-inline">
-            <label for="emailField">Email</label>
-            <input type="text" class="form-control" id="lastnameField" placeholder="Twój email" />
-        </div>
-        <div class="form-inline">
-            <label for="passwordField">Hasło</label>
-            <input type="password" class="form-control" id="passwordField" placeholder="Twój e-mail" />
-        </div>
-        <button type="submit" class="btn btn-primary">Wyślij</button>
-    </fieldset>
-
+    </div>
 </section>
