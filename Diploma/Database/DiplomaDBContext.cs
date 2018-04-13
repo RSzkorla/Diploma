@@ -8,7 +8,9 @@ namespace Diploma.Database
 {
   public class DiplomaDBContext: DbContext
   {
-    public DbSet<Models.User> ListOfProjects { get; set; }
-    public DbSet<Models.Project> ListOfProjectTasks { get; set; }
+    public DbSet<Models.User> ListOfUsers { get; set; }
+    public DbSet<Models.Project> ListOfProjects { get; set; }
+    public DbSet<Models.ProjectTask> ListOfProjectTasks { get; set; }\
+    public DbSet<Models.Promo> ListOfPromos { get; set; }
   }
 }
