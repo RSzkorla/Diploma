@@ -7,23 +7,17 @@ using System.Web.Routing;
 
 namespace Diploma
 {
-  public class RouteConfig
-  {
-    public static void RegisterRoutes(RouteCollection routes)
+    public class RouteConfig
     {
-      routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
-      routes.MapRoute(
-          name: "Default",
-          url: "{controller}/{action}/{id}",
-          defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-      );
+        public static void RegisterRoutes(RouteCollection routes)
+        {
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-            "Confirm", // Route name
-            "{controller}/{action}/{userMail}", // URL with parameters
-             new { controller = "Home", action = "Confirm", userMail = UrlParameter.Optional }); // Parameter defaults
-
-    }
+                name: "Default",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );
+        }
     }
 }

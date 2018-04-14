@@ -17,11 +17,11 @@ namespace Diploma.Controllers
     {
 
         private DiplomaDBContext db = new DiplomaDBContext();
-        private static List<User> usersList = new List<User>();
 
-        public ActionResult Index()
+        public ActionResult Index(string message)
         {
-            return View(usersList);
+            ViewBag.Message = message;
+            return View();
         }
 
         public ActionResult About()
@@ -42,16 +42,27 @@ namespace Diploma.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult RegisterUser(User newUser)
         {
+            string registrationMessage = null;
+
             if (ModelState.IsValid)
             {
-                db.ListOfUsers.Add(newUser);
-                db.SaveChanges();
-                BuildEmailTemlplate(newUser.Email, newUser.ActivationId);
-                return RedirectToAction("Index");
+                try
+                {
+                    db.ListOfUsers.Add(newUser);
+                    db.SaveChanges();
+                    registrationMessage = "Na podany adres e-mail została wysłana wiadomość weryfikacjyjna.";
+                    BuildEmailTemlplate(newUser.Email, newUser.ActivationId);
+                    return RedirectToAction("Index", new { message = registrationMessage });
+                }
+                catch (Exception)
+                {
+                    registrationMessage = "Istnieje już konto o podanym adresie e-mail.";
+                    return RedirectToAction("Index", new { message = registrationMessage });
+                }
             }
             else
             {
-                return Index();
+                return View("Index");
             }
         }
 
@@ -71,7 +82,6 @@ namespace Diploma.Controllers
                                && x.ActivationId == activationId
                                select x;
 
-            //User activatedUser = db.ListOfUsers.Where(x => x.Email == userMail).FirstOrDefault();
             User activatedUser = selectedUser.FirstOrDefault();
 
             activatedUser.EmailActivated = true;
