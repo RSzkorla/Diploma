@@ -6,14 +6,17 @@
     <h3>Dlaczego warto wybrać Diploma?</h3>
     <div class="col-md-4">
         <h3>Stały kontakt z promotorem</h3>
+        <p>Diploma umożliwi ci pewny kontakt z promotorem podczas twojej pracy</p>
         <span class="glyphicon glyphicon-phone"></span>
     </div>
     <div class="col-md-4">
         <h3>Produktywność</h3>
+        <p>Zrób więcej dzięki osobistym retrospecjom i rozbudowanemu planowaniu</p>
         <span class="glyphicon glyphicon-signal"></span>
     </div>
     <div class="col-md-4">
         <h3>Terminowość</h3>
+        <p>Optymalne planowanie czasu to podstawa do sprawnego i efektywnego pisania pracy</p>
         <span class="glyphicon glyphicon-calendar"></span>
     </div>
 </section>
@@ -37,42 +40,42 @@
     </div>
 </section>
 
-<h1>@ViewBag.TwojeImie</h1>
 @using (@Html.BeginForm("RegisterUser", "Home", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
+
     <section id="register">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-4">
-                <form class="form-horizontal row">
-                    <!--TODO beginform?-->
-                    @if (ViewBag.Message != null)
-                    {
-                        <h3>@ViewBag.Message</h3>
-                    }
-                    <div class="form-group">
-                        <label for="FirstName" class="col-xs-2">Imię</label>
-                        <input for="FirstName" data-val="true" type="text" class="form-control" id="FirstName" name="FirstName" placeholder="Twoje imię" />
-                        @Html.ValidationMessage("FirstName")
-                    </div>
-                    <div class="form-group">
-                        <label for="LastName" class="col-xs-2">Nazwisko</label>
-                        <input type="text" class="form-control" id="LastName" name="LastName" placeholder="Twoje nazwisko" />
-                        @Html.ValidationMessage("LastName")
-                    </div>
-                    <div class="form-group">
-                        <label for="Email" class="col-xs-2">Email</label>
-                        <input type="email" class="form-control" id="Email" name="Email" placeholder="Twój email" />
-                        @Html.ValidationMessage("Email")
-                    </div>
-                    <div class="form-group">
-                        <label for="Password" class="col-xs-2">Hasło</label>
-                        <input type="password" class="form-control" id="Password" name="Password" placeholder="Twój e-mail" />
-                        @Html.ValidationMessage("Password")
-                    </div>
-                    <button type="submit" class="btn btn-primary">Wyślij</button>
-                </form>
-            </div>
+        <div class="form-signin">
+            <form class="form-horizontal">
+                <!--TODO beginform?-->
+                @if (ViewBag.Message != null)
+                {
+                    <h3>@ViewBag.Message</h3>
+                }
+                <div class="form-group">
+                    <label for="FirstName" class="col-xs-3">Imię</label>
+                    <input name="FirstName" type="text" class="form-control" id="nameField" placeholder="Twoje imię" />
+                </div>
+                @Html.ValidationMessage("FirstName")
+                <div class="form-group">
+                    <label for="LastName" class="col-xs-3">Nazwisko</label>
+                    <input name="LastName" type="text" class="form-control" id="lastnameField" placeholder="Twoje nazwisko" />
+                </div>
+                @Html.ValidationMessage("LastName")
+                <div class="form-group">
+                    <label for="Email" class="col-xs-3">Email</label>
+                    <input name="Email" type="text" class="form-control" id="lastnameField" placeholder="Twój email" />
+                </div>
+                @Html.ValidationMessage("Email")
+                <div class="form-group">
+                    <label for="Password" class="col-xs-3">Hasło</label>
+                    <input name="Password" type="password" class="form-control" id="passwordField" placeholder="Twój e-mail" />
+                </div>
+                @Html.ValidationMessage("Password")
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Wyślij</button>
+                </div>
+            </form>
         </div>
     </section>
 }

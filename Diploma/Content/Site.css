@@ -1,6 +1,6 @@
 ﻿body {
     font-family: 'Open Sans', sans-serif;
-    background-color: #eaedef;
+    background-color: #eff2f4;
 }
 
 h1, h2, h3, h4 {
@@ -39,8 +39,9 @@ section {
 section:last-of-type {
     border-bottom: none;
 }
-    section:last-of-type form {
-        text-align: center;
+    section:last-of-type .form-signin {
+        max-width: 400px;
+        margin: 0 auto;
     }
 .slider {
     background-image: url("/Images/slider.jpg");
@@ -83,17 +84,39 @@ section:last-of-type {
 footer {
     background-color: #323335;
     color: #fff;
+    text-align: center;
 }
 
-footer ul {
-    list-style:none;
-}
-footer ul li a {
-    cursor: pointer;
-}
-footer ul li a:hover {
-    text-decoration: none;
-}
-footer p {
-    margin:0;
-}
+    footer ul {
+        list-style:none;
+        margin: 0 auto;
+        padding: 0;
+    }
+        footer ul li {
+            display: inline;
+            margin-right: 8px;
+        }
+            footer .linkList li:after {
+                content: "|";
+                margin-left: 8px;
+            }
+            footer .linkList li:last-of-type:after {
+                content: none;
+            }
+            footer ul li a {
+                cursor: pointer;
+                color: #b2b7ba;
+            }
+            footer ul li a:hover {
+                text-decoration: none;
+            }
+            footer .socialList {
+                font-size: 42px;
+            }
+            footer .linkList {
+                font-size: 18px;
+            }
+    footer p {
+        margin: 0 auto;
+        color: #b2b7ba;
+    }
