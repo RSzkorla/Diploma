@@ -208,9 +208,27 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Database\DiplomaDBContext.cs" />
+    <Compile Include="EmailService\MailSender.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804132148370_Initial.cs" />
+    <Compile Include="Migrations\201804132148370_Initial.Designer.cs">
+      <DependentUpon>201804132148370_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804132149398_AddEmailActivated.cs" />
+    <Compile Include="Migrations\201804132149398_AddEmailActivated.Designer.cs">
+      <DependentUpon>201804132149398_AddEmailActivated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804141315248_ActivationId.cs" />
+    <Compile Include="Migrations\201804141315248_ActivationId.Designer.cs">
+      <DependentUpon>201804141315248_ActivationId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804141339466_dataAnnotations.cs" />
+    <Compile Include="Migrations\201804141339466_dataAnnotations.Designer.cs">
+      <DependentUpon>201804141339466_dataAnnotations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\ProjectTask.cs" />
     <Compile Include="Models\Promo.cs" />
@@ -234,6 +252,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="EmailTemplates\Text.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -259,6 +278,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Confirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -275,6 +295,20 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201804132148370_Initial.resx">
+      <DependentUpon>201804132148370_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804132149398_AddEmailActivated.resx">
+      <DependentUpon>201804132149398_AddEmailActivated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804141315248_ActivationId.resx">
+      <DependentUpon>201804141315248_ActivationId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804141339466_dataAnnotations.resx">
+      <DependentUpon>201804141339466_dataAnnotations.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

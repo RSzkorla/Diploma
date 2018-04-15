@@ -24,7 +24,7 @@
     <h3>Lorem ipsum tu będzie super header</h3>
     <div class="row">
         <div class="col-md-6">
-            <img src="~/Images/study.jpg" alt="Study Person"/>
+            <img src="~/Images/study.jpg" alt="Study Person" />
         </div>
         <div class="col-md-6">
             <p>Lorem ipsum dolor sit amet, cadipisicing  sit amet, consectetur adipisicing elit. Atque sed, quidem quis praesentium, ut unde fuga error commodi architecto, oribus omnis minus temporibus perferendis nesciunt quam repellendus nulla nemo ipsum odit corrupti consequuntur possimus, vero mollitia velit ad consectetur. Alias, laborum excepturi nihil autem nemo numquam, ipsa architecto non, magni consequuntlaudantium culpa tenetur at id, beatae pet.</p>
@@ -40,29 +40,42 @@
     </div>
 </section>
 
-<section id="register">
+@using (@Html.BeginForm("RegisterUser", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <section id="register">
         <div class="form-signin">
             <form class="form-horizontal">
                 <!--TODO beginform?-->
+                @if (ViewBag.Message != null)
+                {
+                    <h3>@ViewBag.Message</h3>
+                }
                 <div class="form-group">
-                    <label for="nameField" class="col-xs-3">Imię</label>
-                    <input type="text" class="form-control" id="nameField" placeholder="Twoje imię" />
+                    <label for="FirstName" class="col-xs-3">Imię</label>
+                    <input name="FirstName" type="text" class="form-control" id="nameField" placeholder="Twoje imię" />
                 </div>
+                @Html.ValidationMessage("FirstName")
                 <div class="form-group">
-                    <label for="lastnameField" class="col-xs-3">Nazwisko</label>
-                    <input type="text" class="form-control" id="lastnameField" placeholder="Twoje nazwisko" />
+                    <label for="LastName" class="col-xs-3">Nazwisko</label>
+                    <input name="LastName" type="text" class="form-control" id="lastnameField" placeholder="Twoje nazwisko" />
                 </div>
+                @Html.ValidationMessage("LastName")
                 <div class="form-group">
-                    <label for="emailField" class="col-xs-3">Email</label>
-                    <input type="text" class="form-control" id="lastnameField" placeholder="Twój email" />
+                    <label for="Email" class="col-xs-3">Email</label>
+                    <input name="Email" type="text" class="form-control" id="lastnameField" placeholder="Twój email" />
                 </div>
+                @Html.ValidationMessage("Email")
                 <div class="form-group">
-                    <label for="passwordField" class="col-xs-3">Hasło</label>
-                    <input type="password" class="form-control" id="passwordField" placeholder="Twój e-mail" />
+                    <label for="Password" class="col-xs-3">Hasło</label>
+                    <input name="Password" type="password" class="form-control" id="passwordField" placeholder="Twój e-mail" />
                 </div>
+                @Html.ValidationMessage("Password")
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block">Wyślij</button>
                 </div>
             </form>
         </div>
-</section>
+    </section>
+}
