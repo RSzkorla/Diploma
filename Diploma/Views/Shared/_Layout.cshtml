@@ -26,47 +26,47 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
-                <form class="form-inline navbar-login">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="lastnameField" placeholder="Twój email" />
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="passwordField" placeholder="Twój e-mail" />
-                    </div>
-                    <button type="submit" class="btn btn-primary">Zaloguj</button>
-                </form>
+                    <form class="form-inline navbar-login">
+                        <div class="form-group">
+                            <input name="Email" type="text" class="form-control" id="lastnameField" placeholder="Twój email" />
+                        </div>
+                        <div class="form-group">
+                            <input name="Password" type="password" class="form-control" id="passwordField" placeholder="Twój e-mail" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Zaloguj</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+                
+                <div class="slider">
+                    <div class="slider-content">
+                        <h2>Zwlekasz z projektem?</h2>
+                        <p class="lead">Zacznij działać z Diploma!</p>
+                        <a href="#register" class="btn btn-primary btn-lg">GO</a>
+                    </div>
+                </div>
 
-    <div class="slider">
-        <div class="slider-content">
-            <h2>Zwlekasz z projektem?</h2>
-            <p class="lead">Zacznij działać z Diploma!</p>
-            <a href="#register" class="btn btn-primary btn-lg">GO</a>
-        </div>
-    </div>
+                <div class="container body-content">
+                    @RenderBody()
 
-    <div class="container body-content">
-        @RenderBody()
+                </div>
+                <footer>
+                    <ul class="socialList">
+                        <li><a href="https://github.com/RSzkorla/Diploma" target="_blank"><i class="fab fa-github"></i></a></li>
+                        <li><a><i class="fab fa-facebook"></i></a></li>
+                        <li><a><i class="fab fa-youtube"></i></a></li>
+                    </ul>
+                    <ul class="linkList">
+                        <li><a>Kontakt</a></li>
+                        <li><a>Regulamin</a></li>
+                        <li><a>FAQ</a></li>
+                    </ul>
+                    <p>&copy; @DateTime.Now.Year by Diploma DevTeam</p>
+                </footer>
 
-    </div>
-    <footer>
-        <ul class="socialList">
-            <li><a href="https://github.com/RSzkorla/Diploma" target="_blank"><i class="fab fa-github"></i></a></li>
-            <li><a><i class="fab fa-facebook"></i></a></li>
-            <li><a><i class="fab fa-youtube"></i></a></li>
-        </ul>
-        <ul class="linkList">
-            <li><a>Kontakt</a></li>
-            <li><a>Regulamin</a></li>
-            <li><a>FAQ</a></li>
-        </ul>
-        <p>&copy; @DateTime.Now.Year by Diploma DevTeam</p>
-    </footer>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-</body>
-</html>
+                @Scripts.Render("~/bundles/jquery")
+                @Scripts.Render("~/bundles/bootstrap")
+                @RenderSection("scripts", required: false)
+            </body>
+        </html>
