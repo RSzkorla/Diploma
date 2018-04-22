@@ -15,7 +15,6 @@ namespace Diploma.Controllers
 {
     public class HomeController : Controller
     {
-
         private DiplomaDBContext db = new DiplomaDBContext();
 
         public ActionResult Index(string message)
@@ -100,6 +99,28 @@ namespace Diploma.Controllers
             body = body.Replace("@ViewBag.ConfirmationLink", url);
             body = body.ToString();
             MailSender.BuildEmailTemlplate("Twoje konto zostało utworzone", body, regInfo.Email);
+        }
+
+        [HttpPost]
+        public ActionResult Login(User user)
+        {
+            var userExists = db.ListOfUsers.SingleOrDefault(x => x.Email == user.Email && x.Password == user.Password && x.EmailActivated == true);
+             
+            if (userExists != null)
+            {
+                Session["loginSuccess"] = user;
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.Message = $"{user.FirstName}, witamy na pokładzie.";
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Logout()
+        {
+            ViewBag.Message = $"Nie jesteś zalogowany.";
+            Session["loginSuccess"] = null;
+            return RedirectToAction("Index");
         }
 
     }
