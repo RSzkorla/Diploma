@@ -2,6 +2,13 @@
     ViewBag.Title = "Home Page";
 }
 
+<div class="slider">
+    <div class="slider-content">
+        <h2>Zwlekasz z projektem?</h2>
+        <p class="lead">Zacznij działać z Diploma!</p>
+        <a href="#register" class="btn btn-primary btn-lg">GO</a>
+    </div>
+</div>
 <section class="row features">
     <h3>Dlaczego warto wybrać Diploma?</h3>
     <div class="col-md-4">
@@ -48,30 +55,31 @@
         <h3>@ViewBag.Message</h3>
     }
 
-    <section id="register">
+    <div id="register" class="register">
+        <h3>Zarejestruj się i zobacz jak wiele możesz zrobić</h3>
         <div class="form-signin">
             <form class="form-horizontal">
                 <!--TODO beginform?-->
                 <div class="form-group">
-                    <label for="FirstName" class="col-xs-3">Imię</label>
+                    
                     <input name="FirstName" type="text" class="form-control" id="nameField" placeholder="Twoje imię" />
                 </div>
                 <div class="form-group">
-                    <label for="LastName" class="col-xs-3">Nazwisko</label>
+                   
                     <input name="LastName" type="text" class="form-control" id="lastnameField" placeholder="Twoje nazwisko" />
                 </div>
                 <div class="form-group">
-                    <label for="Email" class="col-xs-3">Email</label>
+                   
                     <input name="Email" type="text" class="form-control" id="lastnameField" placeholder="Twój email" />
                 </div>
                 <div class="form-group">
-                    <label for="Password" class="col-xs-3">Hasło</label>
-                    <input name="Password" type="password" class="form-control" id="passwordField" placeholder="Twój e-mail" />
+                  
+                    <input name="Password" type="password" class="form-control" id="passwordField" placeholder="Twoje hasło" />
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block">Wyślij</button>
                 </div>
             </form>
         </div>
-    </section>
+    </div>
 }

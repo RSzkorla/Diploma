@@ -24,7 +24,7 @@ h1, h2, h3, h4 {
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 400px;
 }
 
 .navbar {
@@ -36,13 +36,7 @@ section {
     margin: 16px 0;
     border-bottom: 1px solid #6f7172;
 }
-section:last-of-type {
-    border-bottom: none;
-}
-    section:last-of-type .form-signin {
-        max-width: 400px;
-        margin: 0 auto;
-    }
+
 .slider {
     background-image: url("/Images/slider.jpg");
     background-repeat: no-repeat;
@@ -72,13 +66,25 @@ section:last-of-type {
 
 .coaching {
     padding-bottom: 32px;
+    
 }
-.coaching h3 {
-    text-align: center;
-}
+    .coaching h3 {
+        text-align: center;
+        margin: 0 auto 16px;
+    }
 .coaching img {
     width: 100%;
     height: auto;
+}
+
+div.register h3 {
+    text-align: center;
+    margin: 0 auto 16px;
+}
+
+div.register .form-signin {
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 footer {
