@@ -4,6 +4,15 @@
 }
 
 <div class="body-content">
-    <h2>Czekamy na wasze pytania!</h2>
-    <h3>Będziemy z chęcią pomagać :)</h3>
+    <section class="question-header">
+        <h2>Czekamy na wasze pytania!</h2>
+        <h3>Będziemy z chęcią pomagać :)</h3>
+    </section>
+    <section class="questions-container">
+       <div class="question">
+           <strong>Q: Tu będzie przykładowa treść pytania</strong>
+           <p>Tu będzie przykładowa odpowiedź</p>
+       </div>
+    </section>
+    @{ Html.RenderPartial("_ContactForm");}
 </div>
