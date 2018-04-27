@@ -45,7 +45,7 @@ section {
 .slider {
     background-image: url("/Images/slider.jpg");
     background-repeat: no-repeat;
-    background-size:contain;
+    background-size:cover;
     width:100%;
     height: 448px; /*24.04 TODO fix */
 }

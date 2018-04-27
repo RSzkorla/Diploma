@@ -48,9 +48,9 @@
                 <li><a><i class="fab fa-youtube"></i></a></li>
             </ul>
             <ul class="linkList">
-                <li><a>Kontakt</a></li>
-                <li><a>Regulamin</a></li>
-                <li><a>FAQ</a></li>
+                <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
+                <li>@Html.ActionLink("Regulamin", "Terms", "Home")</li>
+                <li>@Html.ActionLink("FAQ", "FrequentlyAQ", "Home")</li>
             </ul>
             <p>&copy; @DateTime.Now.Year by Diploma DevTeam</p>
         </footer>

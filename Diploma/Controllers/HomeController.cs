@@ -37,6 +37,20 @@ namespace Diploma.Controllers
             return View();
         }
 
+        public ActionResult Terms()
+        {
+            ViewBag.Message = "To będzie super strona z regulaminem";
+
+            return View();
+        }
+
+        public ActionResult FrequentlyAQ()
+        {
+            ViewBag.Message = "To będzie super strona z FAQ";
+
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult RegisterUser(User newUser)
