@@ -1,14 +1,28 @@
-﻿using System;
+﻿using Diploma.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Web;
+using System.Web.Hosting;
 
 namespace Diploma.EmailService
 {
     public static class MailSender
     {
+        public static void BuildEmailTemlplate(string userEmail, Guid activationId)
+        {
+            using (DiplomaDBContext db = new DiplomaDBContext())
+            {
+                string body = System.IO.File.ReadAllText(HostingEnvironment.MapPath("~/EmailTemplates/") + "Text" + ".cshtml");
+                var regInfo = db.ListOfUsers.Where(x => x.Email == userEmail).FirstOrDefault();
+                var url = "http://localhost:57412/" + "Home/Confirm?userEmail=" + userEmail + "?activationId" + activationId;
+                body = body.Replace("@ViewBag.ConfirmationLink", url);
+                body = body.ToString();
+                BuildEmailTemlplate("Twoje konto zostało utworzone", body, regInfo.Email);
+            }
+        }
 
         public static void BuildEmailTemlplate(string subjectText, string bodyText, string sendTo)
         {
