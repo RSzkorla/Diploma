@@ -1,61 +1,78 @@
 ﻿<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
-        <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
-        <title>@ViewBag.Title - Diploma</title>
-        @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")
-    </head>
-    <body>
-        <div class="navbar navbar-inverse">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("Diploma", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    </ul>
-                        <form class="form-inline navbar-login">
-                            <div class="form-group">
-                                <input name="Email" type="text" class="form-control" id="lastnameField" placeholder="Twój email" />
-                            </div>
-                            <div class="form-group">
-                                <input name="Password" type="password" class="form-control" id="passwordField" placeholder="Twój e-mail" />
-                            </div>
-                            <button type="submit" class="btn btn-primary">Zaloguj</button>
-                        </form>
-                </div>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+    <title>@ViewBag.Title - Diploma</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Diploma", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                @*LOGOWANIE*@
+                @if (Session["loginSuccess"] == null)
+                {
+                    using (@Html.BeginForm("Login", "Home", FormMethod.Post))
+                    {
+                        <div class="form-inline">
+                            <form class="form-inline navbar-login">
+                                <div class="form-group">
+                                    <input name="Email" type="text" class="form-control" id="lastnameField" placeholder="Twój email" />
+                                </div>
+                                <div class="form-group">
+                                    <input name="Password" type="password" class="form-control" id="passwordField" placeholder="Twój e-mail" />
+                                </div>
+                                <button type="submit" class="btn btn-primary">Zaloguj</button>
+                            </form>
+                        </div>
+                    }
+                }
+
+                @if (Session["loginSuccess"] != null)
+                {
+                    using (@Html.BeginForm("Logout", "Home", FormMethod.Post))
+                    {
+                        @Html.ActionLink("Wyloguj", "Logout", "Home")
+                    }
+                }
             </div>
         </div>
-                                
-        @RenderBody()
+    </div>
 
-        <footer>
-            <ul class="socialList">
-                <li><a href="https://github.com/RSzkorla/Diploma" target="_blank"><i class="fab fa-github"></i></a></li>
-                <li><a><i class="fab fa-facebook"></i></a></li>
-                <li><a><i class="fab fa-youtube"></i></a></li>
-            </ul>
-            <ul class="linkList">
-                <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
-                <li>@Html.ActionLink("Regulamin", "Terms", "Home")</li>
-                <li>@Html.ActionLink("FAQ", "FrequentlyAQ", "Home")</li>
-            </ul>
-            <p>&copy; @DateTime.Now.Year by Diploma DevTeam</p>
-        </footer>
-            @Scripts.Render("~/bundles/jquery")
-            @Scripts.Render("~/bundles/bootstrap")
-            @RenderSection("scripts", required: false)
-    </body>
+    @RenderBody()
+
+    <footer>
+        <ul class="socialList">
+            <li><a href="https://github.com/RSzkorla/Diploma" target="_blank"><i class="fab fa-github"></i></a></li>
+            <li><a><i class="fab fa-facebook"></i></a></li>
+            <li><a><i class="fab fa-youtube"></i></a></li>
+        </ul>
+        <ul class="linkList">
+            <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
+            <li>@Html.ActionLink("Regulamin", "Terms", "Home")</li>
+            <li>@Html.ActionLink("FAQ", "FrequentlyAQ", "Home")</li>
+        </ul>
+        <p>&copy; @DateTime.Now.Year by Diploma DevTeam</p>
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
 </html>

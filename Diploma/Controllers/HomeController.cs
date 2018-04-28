@@ -2,6 +2,7 @@
 using Diploma.Database;
 using Diploma.EmailService;
 using Diploma.Models;
+using Diploma.Security;
 using System;
 using System.Linq;
 using System.Web.Mvc;
@@ -85,21 +86,22 @@ namespace Diploma.Controllers
         [HttpPost]
         public ActionResult Login(User user)
         {
-            var userExists = db.ListOfUsers.SingleOrDefault(x => x.Email == user.Email && x.Password == user.Password && x.EmailActivated == true);
-             
-            if (userExists != null)
+            var userExists = db.ListOfUsers.SingleOrDefault(x => x.Email == user.Email && x.EmailActivated == true);
+
+            if (userExists != null && PasswordHash.ValidatePassword(user.Password, userExists.Password) == true)
             {
-                Session["loginSuccess"] = user;
+                Session["loginSuccess"] = true;
+                Session["userEmail"] = user.Email;
                 return RedirectToAction("Index");
             }
-
-            ViewBag.Message = $"{user.FirstName}, witamy na pokładzie.";
-            return RedirectToAction("Index");
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         public ActionResult Logout()
         {
-            ViewBag.Message = $"Nie jesteś zalogowany.";
             Session["loginSuccess"] = null;
             return RedirectToAction("Index");
         }

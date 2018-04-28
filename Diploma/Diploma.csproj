@@ -207,6 +207,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BLL\AccountService.cs" />
+    <Compile Include="Security\AuthorizationService.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Database\DiplomaDBContext.cs" />
     <Compile Include="EmailService\MailSender.cs" />
