@@ -1,14 +1,10 @@
-﻿using Diploma.Database;
+﻿using Diploma.BLL;
+using Diploma.Database;
 using Diploma.EmailService;
 using Diploma.Models;
+using Diploma.Security;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Hosting;
 using System.Web.Mvc;
 
 namespace Diploma.Controllers
@@ -61,10 +57,9 @@ namespace Diploma.Controllers
             {
                 try
                 {
-                    db.ListOfUsers.Add(newUser);
-                    db.SaveChanges();
+                    AccountService.Add(newUser);
                     registrationMessage = "Na podany adres e-mail została wysłana wiadomość weryfikacjyjna.";
-                    BuildEmailTemlplate(newUser.Email, newUser.ActivationId);
+                    MailSender.BuildEmailTemlplate(newUser.Email, newUser.ActivationId);
                     return RedirectToAction("Index", new { message = registrationMessage });
                 }
                 catch (Exception)
@@ -81,58 +76,32 @@ namespace Diploma.Controllers
 
         public ActionResult Confirm()
         {
-            var uriQuery = Request.Url.Query;
-            var uriQuery2 = uriQuery.Replace("?userEmail=", "");
-            var uriQuery3 = uriQuery2.Replace("?activationId", " ");
-
-            var uriUserData = uriQuery3.Split();
-
-            string userMail = uriUserData[0];
-            Guid activationId = new Guid(uriUserData[1]);
-
-            var selectedUser = from x in db.ListOfUsers
-                               where x.Email == userMail
-                               && x.ActivationId == activationId
-                               select x;
-
-            User activatedUser = selectedUser.FirstOrDefault();
-
-            activatedUser.EmailActivated = true;
-            db.SaveChanges();
+            AccountService.ActivateAccount(Request.Url.Query);
             var msg = "Twój adres e-mail został zweryfikowany. Dziękujemy!";
 
             ViewBag.userMessage = msg;
             return View();
         }
 
-        public void BuildEmailTemlplate(string userEmail, Guid activationId)
-        {
-            string body = System.IO.File.ReadAllText(HostingEnvironment.MapPath("~/EmailTemplates/") + "Text" + ".cshtml");
-            var regInfo = db.ListOfUsers.Where(x => x.Email == userEmail).FirstOrDefault();
-            var url = "http://localhost:57412/" + "Home/Confirm?userEmail=" + userEmail + "?activationId" + activationId;
-            body = body.Replace("@ViewBag.ConfirmationLink", url);
-            body = body.ToString();
-            MailSender.BuildEmailTemlplate("Twoje konto zostało utworzone", body, regInfo.Email);
-        }
-
         [HttpPost]
         public ActionResult Login(User user)
         {
-            var userExists = db.ListOfUsers.SingleOrDefault(x => x.Email == user.Email && x.Password == user.Password && x.EmailActivated == true);
-             
-            if (userExists != null)
+            var userExists = db.ListOfUsers.SingleOrDefault(x => x.Email == user.Email && x.EmailActivated == true);
+
+            if (userExists != null && PasswordHash.ValidatePassword(user.Password, userExists.Password) == true)
             {
-                Session["loginSuccess"] = user;
+                Session["loginSuccess"] = true;
+                Session["userEmail"] = user.Email;
                 return RedirectToAction("Index");
             }
-
-            ViewBag.Message = $"{user.FirstName}, witamy na pokładzie.";
-            return RedirectToAction("Index");
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         public ActionResult Logout()
         {
-            ViewBag.Message = $"Nie jesteś zalogowany.";
             Session["loginSuccess"] = null;
             return RedirectToAction("Index");
         }
