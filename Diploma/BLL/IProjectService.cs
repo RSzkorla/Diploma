@@ -9,12 +9,11 @@ namespace Diploma.BLL
 {
   interface IProjectService
   {
-    void Create(Project project);
-    void Update(Project project);
-    void Delete(Project project);
-    void DeleteById(Guid id);
+    void Create(Project project, string userEmail);
+    void Update(Guid id, Project updatedProject, string userEmail);
+    void Delete(Guid id, string userEmail);
     Project GetById(Guid id);
     IEnumerable<Project> GetAll();
-    IEnumerable<Project> GetAllByUserId(Guid userGuid);
+    IEnumerable<Project> GetAllByUserId(string userEmail);
   }
 }
