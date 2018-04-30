@@ -36,6 +36,10 @@ textarea {
     margin-bottom: 0;
 }
 
+.navbar-loginform {
+    margin-top: 8px;
+}
+
 section {
     padding-bottom: 16px;
     margin: 16px 0;

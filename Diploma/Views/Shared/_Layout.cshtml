@@ -29,7 +29,7 @@
                 @*LOGOWANIE*@
                 @if (Session["loginSuccess"] == null)
                 {
-                    using (@Html.BeginForm("Login", "Home", FormMethod.Post))
+                    using (@Html.BeginForm("Login", "Home", FormMethod.Post, new { @class = "navbar-loginform" }))
                     {
                         <div class="form-inline">
                             <form class="form-inline navbar-login">
