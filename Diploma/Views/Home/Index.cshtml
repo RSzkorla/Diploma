@@ -47,33 +47,33 @@
     </div>
 </section>
 
-@using (@Html.BeginForm("RegisterUser", "Home", FormMethod.Post))
+@using (@Html.BeginForm("RegisterUser", "Home", FormMethod.Post, new { @class = "register" }))
 {
     @Html.AntiForgeryToken()
     if (ViewBag.Message != null)
-                {
+    {
         <h3>@ViewBag.Message</h3>
     }
 
-    <div id="register" class="register body-content">
+    <div id="register" class="register-content body-content">
         <h3>Zarejestruj się i zobacz jak wiele możesz zrobić</h3>
         <div class="form-signin">
             <form class="form-horizontal">
                 <!--TODO beginform?-->
                 <div class="form-group">
-                    
+
                     <input name="FirstName" type="text" class="form-control" id="nameField" placeholder="Twoje imię" />
                 </div>
                 <div class="form-group">
-                   
+
                     <input name="LastName" type="text" class="form-control" id="lastnameField" placeholder="Twoje nazwisko" />
                 </div>
                 <div class="form-group">
-                   
+
                     <input name="Email" type="text" class="form-control" id="lastnameField" placeholder="Twój email" />
                 </div>
                 <div class="form-group">
-                  
+
                     <input name="Password" type="password" class="form-control" id="passwordField" placeholder="Twoje hasło" />
                 </div>
                 <div class="form-group">
