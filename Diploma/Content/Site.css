@@ -98,15 +98,15 @@ section {
     }
 
     .features:after, .coaching:after {
-    content: "";
-    position: absolute;
-    background-color: black;
-    width: 750px;
-    height: 1px;
-    bottom: 0;
-    left: 50%;
-    margin-left: -375px;
-}
+        content: "";
+        position: absolute;
+        background-color: #323335;
+        width: 750px;
+        height: 1px;
+        bottom: 0;
+        left: 50%;
+        margin-left: -375px;
+    }
 
 .register {
     margin-bottom: 16px;
@@ -167,3 +167,16 @@ footer {
         margin: 0 auto;
         color: #b2b7ba;
     }
+@media(max-width: 480px) {
+    .features:after, .coaching:after {
+        width: 360px;
+        margin-left: -180px;
+    }
+}
+
+@media(max-width: 320px) {
+    .features:after, .coaching:after {
+        width: 240px;
+        margin-left: -120px;
+    }
+}
