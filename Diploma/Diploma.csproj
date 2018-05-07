@@ -208,7 +208,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BLL\AccountService.cs" />
     <Compile Include="BLL\IProjectService.cs" />
+    <Compile Include="BLL\IProjectTaskService.cs" />
     <Compile Include="BLL\ProjectService.cs" />
+    <Compile Include="BLL\ProjectTaskService.cs" />
     <Compile Include="Security\AuthorizationService.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Database\DiplomaDBContext.cs" />
