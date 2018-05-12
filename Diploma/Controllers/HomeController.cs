@@ -69,10 +69,9 @@ namespace Diploma.Controllers
                     MailSender.BuildEmailTemlplate(newUser.Email, newUser.ActivationId);
                     return RedirectToAction("Index", new { message = registrationMessage });
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     registrationMessage = "Istnieje już konto o podanym adresie e-mail.";
-                    registrationMessage = e.ToString();
                     return RedirectToAction("Index", new { message = registrationMessage });
                 }
             }
