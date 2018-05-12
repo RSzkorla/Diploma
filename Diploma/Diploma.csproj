@@ -211,6 +211,7 @@
     <Compile Include="BLL\IProjectTaskService.cs" />
     <Compile Include="BLL\ProjectService.cs" />
     <Compile Include="BLL\ProjectTaskService.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Security\AuthorizationService.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Database\DiplomaDBContext.cs" />
@@ -289,9 +290,11 @@
     <Content Include="Views\Home\Terms.cshtml" />
     <Content Include="Views\Home\FrequentlyAQ.cshtml" />
     <Content Include="Views\Shared\_ContactForm.cshtml" />
+    <Content Include="Views\User\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Authorization\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -29,7 +29,7 @@
                 @*LOGOWANIE*@
                 @if (Session["loginSuccess"] == null)
                 {
-                    using (@Html.BeginForm("Login", "Home", FormMethod.Post, new { @class = "navbar-loginform" }))
+                    using (@Html.BeginForm("Login", "User", FormMethod.Post, new { @class = "navbar-loginform" }))
                     {
                         <div class="form-inline">
                             <form class="form-inline navbar-login">
@@ -47,11 +47,11 @@
 
                 @if (Session["loginSuccess"] != null)
                 {
-                    using (@Html.BeginForm("Logout", "Home", FormMethod.Post))
-                    {
-                        @Html.ActionLink("Wyloguj", "Logout", "Home")
-                    }
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Wyloguj", "Logout", "User")</li>
+                        </ul>
                 }
+
             </div>
         </div>
     </div>

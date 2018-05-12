@@ -62,7 +62,7 @@ namespace Diploma.EmailService
             client.EnableSsl = true;
             client.UseDefaultCredentials = false;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.Credentials = new System.Net.NetworkCredential("diploma.register@gmail.com", "ctor{dip.reg123}");
+            client.Credentials = new System.Net.NetworkCredential(System.Configuration.ConfigurationManager.AppSettings["Email"], System.Configuration.ConfigurationManager.AppSettings["EmailPassword"]);
             try
             {
                 client.Send(mail);
