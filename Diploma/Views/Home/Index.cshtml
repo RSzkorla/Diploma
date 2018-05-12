@@ -69,31 +69,34 @@
 @using (@Html.BeginForm("RegisterUser", "Home", FormMethod.Post, new { @class = "register" }))
 {
     @Html.AntiForgeryToken()
-    if (ViewBag.Message != null)
-    {
-        <h3>@ViewBag.Message</h3>
-    }
 
     <div id="register" class="register-content body-content">
-        <h3>Zarejestruj się i zobacz jak wiele możesz zrobić</h3>
+        @if (ViewBag.Message != null)
+        {
+            <h3>@ViewBag.Message</h3>
+        }
+        @if (ViewBag.Message == null)
+        {
+            <h3>Zarejestruj się i zobacz jak wiele możesz zrobić</h3>
+        }
         <div class="form-signin">
             <form class="form-horizontal">
                 <!--TODO beginform?-->
                 <div class="form-group">
-
                     <input name="FirstName" type="text" class="form-control" id="nameField" placeholder="Twoje imię" />
+                    @Html.ValidationMessage("FirstName", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
-
                     <input name="LastName" type="text" class="form-control" id="lastnameField" placeholder="Twoje nazwisko" />
+                    @Html.ValidationMessage("LastName", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
-
-                    <input name="Email" type="text" class="form-control" id="lastnameField" placeholder="Twój email" />
+                    <input name="Email" type="email" class="form-control" id="lastnameField" placeholder="Twój email"/>
+                    @Html.ValidationMessage("Email", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
-
                     <input name="Password" type="password" class="form-control" id="passwordField" placeholder="Twoje hasło" />
+                    @Html.ValidationMessage("Password", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block">Wyślij</button>

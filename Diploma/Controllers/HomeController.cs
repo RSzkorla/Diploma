@@ -16,7 +16,14 @@ namespace Diploma.Controllers
         public ActionResult Index(string message)
         {
             ViewBag.Message = message;
-            return View();
+            if (Session["user"] == null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Dashboard", "User");
+            }
         }
 
         public ActionResult About()
@@ -62,9 +69,10 @@ namespace Diploma.Controllers
                     MailSender.BuildEmailTemlplate(newUser.Email, newUser.ActivationId);
                     return RedirectToAction("Index", new { message = registrationMessage });
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     registrationMessage = "Istnieje już konto o podanym adresie e-mail.";
+                    registrationMessage = e.ToString();
                     return RedirectToAction("Index", new { message = registrationMessage });
                 }
             }
@@ -82,29 +90,5 @@ namespace Diploma.Controllers
             ViewBag.userMessage = msg;
             return View();
         }
-
-        [HttpPost]
-        public ActionResult Login(User user)
-        {
-            var userExists = db.ListOfUsers.SingleOrDefault(x => x.Email == user.Email && x.EmailActivated == true);
-
-            if (userExists != null && PasswordHash.ValidatePassword(user.Password, userExists.Password) == true)
-            {
-                Session["loginSuccess"] = true;
-                Session["userEmail"] = user.Email;
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return RedirectToAction("Index");
-            }
-        }
-
-        public ActionResult Logout()
-        {
-            Session["loginSuccess"] = null;
-            return RedirectToAction("Index");
-        }
-
     }
 }
