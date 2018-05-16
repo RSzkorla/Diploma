@@ -40,10 +40,25 @@ textarea {
     margin-top: 8px;
 }
 
-.btn-primary {
+.btn {
     background-color: #f4a53d;
     border-color: #ef9826;
+    color: #fff;
 }
+
+
+    .btn:hover {
+        background-color: #f7ad4c;
+        border-color: #f7ad4c;
+        color: #fff;
+    }
+
+
+    .btn:focus {
+        background-color: #ef9826;
+        border-color: #ef9826;
+        color: #fff;
+    }
 
 section {
     padding-bottom: 16px;
@@ -281,6 +296,7 @@ footer {
             }
             footer ul li a:hover {
                 text-decoration: none;
+                color: #f7ad4c;
             }
             footer .socialList {
                 font-size: 42px;
@@ -309,5 +325,18 @@ footer {
 /*DASHBOARD*/
 .projects-container {
 }
+
+.projects-container button.btn {
+    position: relative;
+}
+
+    .projects-container button.btn:after {
+        position: absolute;
+        content:"";
+        width: 10px;
+        height: 10px;
+        color: red;
+    }
+
 .reminder-container {
 }
