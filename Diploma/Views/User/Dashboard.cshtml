@@ -2,21 +2,65 @@
 @{
     ViewBag.Title = "Dashboard";
 }
-
-<h2>EMPTY DASHBOARD VIEW.</h2>
-
-<h2>@ViewBag.User.FirstName's dashboard,</h2>
-
 <section class="body-content">
-    <div class="projects-container">
-        <button id="btnShowModal" class="btn btn-sm btn-default">
-            Dodaj Projekt
-            <i class="fas fa-plus"></i>
-        </button>
-    </div>
+    <h2>Witaj w centrum dowodzenia @ViewBag.User.FirstName</h2>
+
+    @if (@ViewBag.User.ListOfProjects == null)
+    {
+        <p>Nic tu nie ma</p>
+    }
+    else
+    {
+        <div class="projects-container">
+            <button id="btnShowModal" class="btn btn-sm btn-default">
+                Dodaj Projekt
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+    }
+    
     <div class="reminder-container">
-        <h3>
-            Rzeczy do zrobienia:
-        </h3>
+        <div class="reminder-todo">
+            <h4>
+                Rzeczy do zrobienia:
+            </h4>
+            <div class="reminder-todo-container">
+                <!--foreach-->
+            </div>
+        </div>
+        <div class="protip-slider">
+            <div class="slider elements-list" id="slider1">
+                <div class="slider-slides-cnt">
+                    <article class="element slider-slide">
+                        <h2 class="element-title">
+                            1 Lorem ipsum dolor sit.
+                        </h2>
+                        <div class="element-text">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit...
+                        </div>
+                    </article>
+                    <article class="element slider-slide">
+                        <h2 class="element-title">
+                            2 Lorem ipsum dolor sit.
+                        </h2>
+                        <div class="element-text">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit...
+                        </div>
+                    </article>
+                </div>
+                <div class="slider-nav">
+                    <button type="button" class="slider-button slider-button-prev">Poprzedni</button>
+                    <button type="button" class="slider-button slider-button-next">Następny</button>
+                </div>
+                <ul class="slider-dots">
+                    <li class="slider-dots-element slider-dots-element-active"><button class="slider-dots-button" type="button">1</button></li>
+                    <li class="slider-dots-element"><button class="slider-dots-button" type="button">2</button></li>
+                    <li class="slider-dots-element"><button class="slider-dots-button" type="button">3</button></li>
+                </ul>
+            </div>
+        </div>
+        <div class="reminder-stats">
+
+        </div>
     </div>
 </section>

@@ -69,7 +69,7 @@ section {
         text-align: center;
     }
 
-.slider {
+.homepage-slider {
     background-image: url("/Images/slider.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -77,14 +77,14 @@ section {
     height: 448px; /*24.04 TODO fix */
     padding-top: 60px;
 }
-.slider .slider-content {
-    width: 1250px;
-    margin: 0 auto;
-    color: #fff;
-}
-.slider .slider-content h2 {
-    margin-top: 0;
-}
+    .homepage-slider .slider-content {
+        width: 1250px;
+        margin: 0 auto;
+        color: #fff;
+    }
+        .homepage-slider .slider-content h2 {
+            margin-top: 0;
+        }
 .features {
     display: block;
     text-align: center;
