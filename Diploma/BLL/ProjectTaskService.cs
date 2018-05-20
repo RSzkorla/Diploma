@@ -7,66 +7,66 @@ using Diploma.Models;
 
 namespace Diploma.BLL
 {
-  public class ProjectTaskService : IProjectTaskService
-  {
-    public void Create(Guid projectId, ProjectTask newpProjectTask)
+    public class ProjectTaskService : IProjectTaskService
     {
-      using (var context = new DiplomaDBContext())
-      {
-        var project = context.ListOfProjects.SingleOrDefault(x => x.Id == projectId);
-        if (project != null)
+        public void Create(Guid projectId, ProjectTask newpProjectTask)
         {
-          project.ListOfProjectTasks.Add(newpProjectTask);
+            using (var context = new DiplomaDBContext())
+            {
+                var project = context.ListOfProjects.SingleOrDefault(x => x.Id == projectId);
+                if (project != null)
+                {
+                    project.ListOfProjectTasks.Add(newpProjectTask);
+                }
+                context.SaveChangesAsync();
+            }
         }
-        context.SaveChangesAsync();
-      }
-    }
 
-    public void Update(Guid projectId, Guid projectTaskId, ProjectTask updatedProjectTask)
-    {
-      using (var context = new DiplomaDBContext())
-      {
-        var project = context.ListOfProjects.SingleOrDefault(x => x.Id == projectId);
-        if (project != null)
+        public void Update(Guid projectId, Guid projectTaskId, ProjectTask updatedProjectTask)
         {
-          var projectTask = project.ListOfProjectTasks.SingleOrDefault(x => x.Id == projectTaskId);
-          projectTask = updatedProjectTask;
+            using (var context = new DiplomaDBContext())
+            {
+                var project = context.ListOfProjects.SingleOrDefault(x => x.Id == projectId);
+                if (project != null)
+                {
+                    var projectTask = project.ListOfProjectTasks.SingleOrDefault(x => x.Id == projectTaskId);
+                    projectTask = updatedProjectTask;
+                }
+                context.SaveChangesAsync();
+            }
         }
-        context.SaveChangesAsync();
-      }
-    }
 
-    public void Delete(Guid projectId, Guid projectTaskId)
-    {
-      using (var context = new DiplomaDBContext())
-      {
-        var project = context.ListOfProjects.SingleOrDefault(x => x.Id == projectId);
-        if (project != null)
+        public void Delete(Guid projectId, Guid projectTaskId)
         {
-          var projectTask = project.ListOfProjectTasks.SingleOrDefault(x => x.Id == projectTaskId);
-          project.ListOfProjectTasks.Remove(projectTask);
+            using (var context = new DiplomaDBContext())
+            {
+                var project = context.ListOfProjects.SingleOrDefault(x => x.Id == projectId);
+                if (project != null)
+                {
+                    var projectTask = project.ListOfProjectTasks.SingleOrDefault(x => x.Id == projectTaskId);
+                    project.ListOfProjectTasks.Remove(projectTask);
+                }
+                context.SaveChangesAsync();
+            }
         }
-        context.SaveChangesAsync();
-      }
-    }
 
-    public ProjectTask Get(Guid projectTaskId)
-    {
-      using (var context = new DiplomaDBContext())
-      {
-        return context.ListOfProjectTasks.SingleOrDefault(x => x.Id == projectTaskId);
-      }
-    }
+        public ProjectTask Get(Guid projectTaskId)
+        {
+            using (var context = new DiplomaDBContext())
+            {
+                return context.ListOfProjectTasks.SingleOrDefault(x => x.Id == projectTaskId);
+            }
+        }
 
-    public IEnumerable<ProjectTask> GetAllByProject(Guid projectId)
-    {
-      using (var context = new DiplomaDBContext())
-      {
-        var project = context.ListOfProjects.SingleOrDefault(x => x.Id == projectId);
-        if (project != null)
-          return project.ListOfProjectTasks;
-        return null;
-      }
+        public IEnumerable<ProjectTask> GetAllByProject(Guid projectId)
+        {
+            using (var context = new DiplomaDBContext())
+            {
+                var project = context.ListOfProjects.SingleOrDefault(x => x.Id == projectId);
+                if (project != null)
+                    return project.ListOfProjectTasks;
+                return null;
+            }
+        }
     }
-  }
 }

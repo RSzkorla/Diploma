@@ -1,6 +1,8 @@
 ﻿using Diploma.Database;
+using Diploma.EmailService;
 using Diploma.Models;
 using Diploma.Security;
+using Diploma.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,16 @@ namespace Diploma.BLL
 {
     public static class AccountService
     {
+        public static User GetByKey(string userEmail)
+        {
+            User user = new User();
+            using (DiplomaDBContext db = new DiplomaDBContext())
+            {
+                user = db.ListOfUsers.Where(x => x.Email == userEmail).FirstOrDefault();
+                return user;
+            }
+        }
+
         public static void Add(User user)
         {
             using (DiplomaDBContext db = new DiplomaDBContext())
@@ -20,28 +32,51 @@ namespace Diploma.BLL
             }
         }
 
-        public static void ActivateAccount(string uriQuery)
+        public static void Register(UserRegistrationVM user)
         {
-            var uriQuery2 = uriQuery.Replace("?userEmail=", "");
-            var uriQuery3 = uriQuery2.Replace("?activationId", " ");
+            User newUser = new User()
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                EmailActivated = false,
+                Password = user.Password,
+                ListOfProjects = new List<Project>()
+            };
 
-            var uriUserData = uriQuery3.Split();
+            Add(newUser);
+        }
 
-            string userMail = uriUserData[0];
-            Guid activationId = new Guid(uriUserData[1]);
+        public static string GenerateUserHash(User user)
+        {
+            return $"{user.Email}{user.ActivationId}".GetHashCode().ToString();
+        }
 
+        public static void ActivateAccount(string userEmail, string hash)
+        {
             using (DiplomaDBContext db = new DiplomaDBContext())
             {
-                var selectedUser = from x in db.ListOfUsers
-                                   where x.Email == userMail
-                                   && x.ActivationId == activationId
-                                   select x;
+                User user = db.ListOfUsers.Where(x => x.Email == userEmail).FirstOrDefault();
 
-                User activatedUser = selectedUser.FirstOrDefault();
+                if (GenerateUserHash(user) == hash)
+                {
+                    user.EmailActivated = true;
+                    db.SaveChanges();
 
-                activatedUser.EmailActivated = true;
+                }
+            }
+        }
+
+        public static void ChangePassword(string userEmail, string newPassword)
+        {
+            using (DiplomaDBContext db = new DiplomaDBContext())
+            {
+                User user = db.ListOfUsers.Where(x => x.Email == userEmail).FirstOrDefault();
+
+                user.Password = PasswordHash.HashPassword(newPassword);
                 db.SaveChanges();
             }
         }
     }
+
 }

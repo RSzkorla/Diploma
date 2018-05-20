@@ -1,4 +1,6 @@
-﻿using Diploma.Database;
+﻿using Diploma.BLL;
+using Diploma.Database;
+using Diploma.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,16 +13,29 @@ namespace Diploma.EmailService
 {
     public static class MailSender
     {
-        public static void BuildEmailTemlplate(string userEmail, Guid activationId)
+        public static void BuildRegistrationEmailTemlplate(string userEmail)
         {
             using (DiplomaDBContext db = new DiplomaDBContext())
             {
                 string body = System.IO.File.ReadAllText(HostingEnvironment.MapPath("~/EmailTemplates/") + "Text" + ".cshtml");
-                var regInfo = db.ListOfUsers.Where(x => x.Email == userEmail).FirstOrDefault();
-                var url = "http://localhost:57412/" + "Home/Confirm?userEmail=" + userEmail + "?activationId" + activationId;
+                var user = db.ListOfUsers.Where(x => x.Email == userEmail).FirstOrDefault();
+                var url = "http://localhost:57412/" + "User/Confirm?userEmail=" + userEmail + "&hash=" + AccountService.GenerateUserHash(user);
                 body = body.Replace("@ViewBag.ConfirmationLink", url);
                 body = body.ToString();
-                BuildEmailTemlplate("Twoje konto zostało utworzone", body, regInfo.Email);
+                BuildEmailTemlplate("Twoje konto zostało utworzone", body, user.Email);
+            }
+        }
+
+        public static void BuildPasswordRecoveryEmailTemplate(string userEmail)
+        {
+            using (DiplomaDBContext db = new DiplomaDBContext())
+            {
+                string body = System.IO.File.ReadAllText(HostingEnvironment.MapPath("~/EmailTemplates/") + "Password" + ".cshtml");
+                var user = db.ListOfUsers.Where(x => x.Email == userEmail).FirstOrDefault();
+                var url = "http://localhost:57412/" + "User/PasswordRecovery?userEmail=" + userEmail + "&hash=" + AccountService.GenerateUserHash(user);
+                body = body.Replace("@ViewBag.ConfirmationLink", url);
+                body = body.ToString();
+                BuildEmailTemlplate("Przypomnienie hasła", body, user.Email);
             }
         }
 
