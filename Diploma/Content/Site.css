@@ -323,8 +323,8 @@ footer {
 }
 
 /*DASHBOARD*/
-.projects-container {
-}
+/*.projects-container {
+}*/
 
 .projects-container button.btn {
     position: relative;
@@ -338,5 +338,33 @@ footer {
         color: red;
     }
 
-.reminder-container {
+/*.reminder-container {
+}*/
+
+/*SLIDER*/
+.protip-slider {
+    background: #eff2f4;
+}
+
+.slide {
+    position: absolute;
+    height: 32px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    opacity:0;
+    z-index:0;
+}
+/*.active-slide {
+    opacity:1;
+    z-index:1;
+}*/
+.green {
+    background: green;
+}
+.yellow {
+    background: yellow;
+}
+.blue {
+    background: blue;
 }
