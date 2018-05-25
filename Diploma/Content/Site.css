@@ -344,27 +344,21 @@ footer {
 /*SLIDER*/
 .protip-slider {
     background: #eff2f4;
+    margin-bottom: 64px;
 }
 
-.slide {
-    position: absolute;
-    height: 32px;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    opacity:0;
-    z-index:0;
+#intro {
+    position: relative;
+    height: 100px;
+    background: #ccc;
 }
-/*.active-slide {
-    opacity:1;
-    z-index:1;
-}*/
-.green {
-    background: green;
-}
-.yellow {
-    background: yellow;
-}
-.blue {
-    background: blue;
-}
+
+    #intro .slide {
+        position: absolute;
+        top: 40px;
+        width: 100px;
+    }
+
+        #intro div.slide:first-child {
+            top: 20px;
+        }

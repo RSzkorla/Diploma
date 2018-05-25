@@ -7,54 +7,57 @@
 
     @if (@ViewBag.User.ListOfProjects == null)
     {
-        <p>Nic tu nie ma</p>
+        <button id="btnShowModal" class="btn btn-sm btn-default" data-toggle="modal" data-target="#myModal">
+            Dodaj Projekt
+            <i class="fas fa-plus"></i>
+        </button>
     }
     else
     {
         <div class="projects-container">
             <button id="btnShowModal" class="btn btn-sm btn-default" data-toggle="modal" data-target="#myModal">
-                Dodaj Projekt
+                Dodaj kolejny projekt
                 <i class="fas fa-plus"></i>
             </button>
 
 
-                <!-- Modal -->
-                <div class="modal fade" id="myModal" role="dialog">
-                    <div class="modal-dialog">
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
 
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Modal Header</h4>
-                            </div>
-                            <div class="modal-body">
-                                <p>Dodaj projekt</p>
-                 
-                                <form class="form-horizontal">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="titleField" placeholder="Tytuł projektu" />
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="promoemailField" placeholder="Email do promotora" />
-                                    </div>
-                                    <div class="form-group">
-                                        <textarea class="form-control" id="projectdescField" placeholder="Opis projektu" maxlength="200"></textarea>
-                                    </div>
-                                </form>
-
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
-                                <button class="btn btn-primary" type="submit" name="button">Dodaj projekt</button>
-                            </div>
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Modal Header</h4>
                         </div>
+                        <div class="modal-body">
+                            <p>Dodaj projekt</p>
 
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="titleField" placeholder="Tytuł projektu" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="promoemailField" placeholder="Email do promotora" />
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" id="projectdescField" placeholder="Opis projektu" maxlength="200"></textarea>
+                                </div>
+                            </form>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+                            <button class="btn btn-primary" type="submit" name="button">Dodaj projekt</button>
+                        </div>
                     </div>
-                </div>
 
-         
+                </div>
+            </div>
+
+
 
 
 
@@ -78,43 +81,16 @@
         </div>
     </div>
 
-<section class="protip-slider" id="carousel">
-        <div class="btn-bar">
-            <div id="buttons" class="buttons">
-                <a id="prev" href="#"><</a>
-                <a id="next" href="#">></a> 
-            </div>
+<section class="protip-slider">
+    <div id="intro">
+        <div class="slide">
+            <p>First quote</p>
         </div>
-        <div id="slides">
-            <div class="slide  green" id="slide">
-                <div class="quoteContainer">
-                    <p class="quote-phrase">
-                        <span class="quote-marks">"</span> I was literally BLOWN AWAY by Company A's work! They went above and beyond all of our expectations with design, usability. and branding, I will reccommend them to everyone I know!<class ="quote-marks">"</span>
-                    </p>
-                </div>
-                <div class="authorContainer">
-                    <p class="quote-author">John Doe // Local Business Owner</p>
-                </div>
-            </div>
-            <div class="slide yellow" id="slide">
-                <div class="quoteContainer">
-                    <p class="quote-phrase">
-                        <span class="quote-marks">"</span> I was literally BLOWN AWAY by Company A's work! They went above and beyond all of our expectations with design, usability. and branding, I will reccommend them to everyone I know!<class ="quote-marks">"</span>
-                    </p>
-                </div>
-                <div class="authorContainer">
-                    <p class="quote-author">John Doe // Local Business Owner</p>
-                </div>
-            </div>
-            <div class="slide blue" id="slide">
-                <div class="quoteContainer">
-                    <p class="quote-phrase">
-                        <span class="quote-marks">"</span> I was literally BLOWN AWAY by Company A's work! They went above and beyond all of our expectations with design, usability. and branding, I will reccommend them to everyone I know!<class ="quote-marks">"</span>
-                    </p>
-                </div>
-                <div class="authorContainer">
-                    <p class="quote-author">John Doe // Local Business Owner</p>
-                </div>
-            </div>
+        <div class="slide">
+            <p>Second quote</p>
         </div>
+        <div class="slide">
+            <p>Third quote</p>
+        </div>
+    </div>
 </section>
