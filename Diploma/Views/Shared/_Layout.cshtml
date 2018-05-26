@@ -41,15 +41,16 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary">Zaloguj</button>
                             </form>
+                            @Html.ActionLink("Zapomniałem hasła", "ForgotPassword", "User")
                         </div>
                     }
                 }
 
                 @if (Session["loginSuccess"] != null)
                 {
-                        <ul class="nav navbar-nav">
-                            <li>@Html.ActionLink("Wyloguj", "Logout", "User")</li>
-                        </ul>
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Wyloguj", "Logout", "User")</li>
+                    </ul>
                 }
 
             </div>
