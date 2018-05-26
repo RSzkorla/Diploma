@@ -212,9 +212,9 @@
     <Compile Include="BLL\ProjectService.cs" />
     <Compile Include="BLL\ProjectTaskService.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Migrations\201805161249401_data annotations to vm.cs" />
-    <Compile Include="Migrations\201805161249401_data annotations to vm.Designer.cs">
-      <DependentUpon>201805161249401_data annotations to vm.cs</DependentUpon>
+    <Compile Include="Migrations\201805261837535_Initial.cs" />
+    <Compile Include="Migrations\201805261837535_Initial.Designer.cs">
+      <DependentUpon>201805261837535_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Security\AuthorizationService.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -222,22 +222,6 @@
     <Compile Include="EmailService\MailSender.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804132148370_Initial.cs" />
-    <Compile Include="Migrations\201804132148370_Initial.Designer.cs">
-      <DependentUpon>201804132148370_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804132149398_AddEmailActivated.cs" />
-    <Compile Include="Migrations\201804132149398_AddEmailActivated.Designer.cs">
-      <DependentUpon>201804132149398_AddEmailActivated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804141315248_ActivationId.cs" />
-    <Compile Include="Migrations\201804141315248_ActivationId.Designer.cs">
-      <DependentUpon>201804141315248_ActivationId.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804141339466_dataAnnotations.cs" />
-    <Compile Include="Migrations\201804141339466_dataAnnotations.Designer.cs">
-      <DependentUpon>201804141339466_dataAnnotations.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Project.cs" />
@@ -320,20 +304,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804132148370_Initial.resx">
-      <DependentUpon>201804132148370_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804132149398_AddEmailActivated.resx">
-      <DependentUpon>201804132149398_AddEmailActivated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804141315248_ActivationId.resx">
-      <DependentUpon>201804141315248_ActivationId.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804141339466_dataAnnotations.resx">
-      <DependentUpon>201804141339466_dataAnnotations.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805161249401_data annotations to vm.resx">
-      <DependentUpon>201805161249401_data annotations to vm.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805261837535_Initial.resx">
+      <DependentUpon>201805261837535_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
