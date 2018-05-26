@@ -5,9 +5,7 @@ using Diploma.Models;
 using Diploma.Security;
 using Diploma.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Diploma.Controllers
@@ -83,7 +81,7 @@ namespace Diploma.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ResetPassword(UserPasswordVM user, string userEmail)
+        public ActionResult ResetPassword(UserPasswordVM user, string userEmail, string hash)
         {
             if (ModelState.IsValid)
             {
@@ -92,11 +90,11 @@ namespace Diploma.Controllers
             }
             else
             {
-                return View("PasswordRecovery");
+                return RedirectToAction("PasswordRecovery", "User", new { Password = user.Password, ConfirmPassword = user.ConfirmPassword, userEmail = userEmail, hash = hash });
             }
         }
 
-        public ActionResult PasswordRecovery(string userEmail, string hash)
+        public ActionResult PasswordRecovery(UserPasswordVM user, string userEmail, string hash)
         {
             if (AccountService.GetByKey(userEmail) == null || AccountService.GenerateUserHash(AccountService.GetByKey(userEmail)) != hash)
             {
@@ -105,6 +103,10 @@ namespace Diploma.Controllers
             else
             {
                 ViewBag.Email = userEmail;
+                ViewBag.Hash = hash;
+                ViewBag.User = user;
+
+
                 return View();
             }
         }
