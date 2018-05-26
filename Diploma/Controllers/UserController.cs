@@ -37,7 +37,7 @@ namespace Diploma.Controllers
             }
             else
             {
-                return View("Index", "Home");
+                return View("../Home/Index");
             }
         }
 
@@ -141,7 +141,7 @@ namespace Diploma.Controllers
             string eMail = Session["user"].ToString();
             User currentUser = db.ListOfUsers.Where(x => x.Email == eMail).FirstOrDefault();
             ViewBag.User = currentUser;
-            return View(ViewBag.User);
+            return View();
         }
 
         //bez bazy

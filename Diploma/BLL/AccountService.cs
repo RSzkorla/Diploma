@@ -49,7 +49,12 @@ namespace Diploma.BLL
 
         public static string GenerateUserHash(User user)
         {
-            return $"{user.Email}{user.ActivationId}".GetHashCode().ToString();
+            if (user != null)
+            {
+                return $"{user.Email}{user.ActivationId}".GetHashCode().ToString();
+            }
+            else
+                return null;
         }
 
         public static void ActivateAccount(string userEmail, string hash)
