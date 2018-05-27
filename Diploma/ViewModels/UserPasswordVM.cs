@@ -11,6 +11,5 @@ namespace Diploma.ViewModels
 
         [Compare("Password", ErrorMessage = "Hasła muszą się zgadzać!")]
         public string ConfirmPassword { get; set; }
-
     }
 }
