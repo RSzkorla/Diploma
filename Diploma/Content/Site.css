@@ -338,27 +338,17 @@ footer {
         color: red;
     }
 
-/*.reminder-container {
-}*/
-
 /*SLIDER*/
 .protip-slider {
-    background: #eff2f4;
-    margin-bottom: 64px;
-}
-
-#intro {
     position: relative;
     height: 100px;
     background: #ccc;
 }
 
-    #intro .slide {
-        position: absolute;
-        top: 40px;
-        width: 100px;
-    }
+.protip-slider .slide {
+    position: absolute;
+    top: 40px;
+    width: 100px;
+    left: 50%;
 
-        #intro div.slide:first-child {
-            top: 20px;
-        }
+}

@@ -1,10 +1,9 @@
 ﻿$(document).ready(function () {
-    // hide all quotes except the first
+
     $('.slide').hide().eq(0).show();
 
-    var pause = 3000;
-    var motion = 500;
-
+    var pause = 5000;
+    var motion = 1500;
     var slide = $('.slide');
     var count = slide.length;
     var i = 0;
@@ -18,7 +17,7 @@
             i = 0;
         }
 
-        slide.eq(i).animate({ opacity: 'toggle', top: '20px' }, motion);
+        slide.eq(i).animate({ opacity: 'toggle', top: '40px' }, motion);
 
         setTimeout(transition, pause);
     }
