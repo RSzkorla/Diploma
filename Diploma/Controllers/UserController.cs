@@ -5,6 +5,7 @@ using Diploma.Models;
 using Diploma.Security;
 using Diploma.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -135,33 +136,33 @@ namespace Diploma.Controllers
         }
 
         //z bazą danych
-        [AutorizationService]
-        public ActionResult Dashboard()
-        {
-            string eMail = Session["user"].ToString();
-            User currentUser = db.ListOfUsers.Where(x => x.Email == eMail).FirstOrDefault();
-            ViewBag.User = currentUser;
-            return View();
-        }
-
-        //bez bazy
+        //[AutorizationService]
         //public ActionResult Dashboard()
         //{
-        //    User currentUser = new User();
-        //    currentUser.Email = "test@test.pl";
-        //    currentUser.FirstName = "Test";
-        //    currentUser.LastName = "Testowy";
-
-        //    Project project1 = new Project();
-        //    project1.Title = "Projekt testowy";
-        //    project1.StartDate = DateTime.Now;
-
-        //    currentUser.ListOfProjects = new List<Project>();
-        //    currentUser.ListOfProjects.Add(project1);
-
+        //    string eMail = Session["user"].ToString();
+        //    User currentUser = db.ListOfUsers.Where(x => x.Email == eMail).FirstOrDefault();
         //    ViewBag.User = currentUser;
-
-        //    return View(ViewBag.User);
+        //    return View();
         //}
+
+        //bez bazy
+        public ActionResult Dashboard()
+        {
+            User currentUser = new User();
+            currentUser.Email = "test@test.pl";
+            currentUser.FirstName = "Test";
+            currentUser.LastName = "Testowy";
+
+            Project project1 = new Project();
+            project1.Title = "Projekt testowy";
+            project1.StartDate = DateTime.Now;
+
+            currentUser.ListOfProjects = new List<Project>();
+            currentUser.ListOfProjects.Add(project1);
+
+            ViewBag.User = currentUser;
+
+            return View(ViewBag.User);
+        }
     }
 }
