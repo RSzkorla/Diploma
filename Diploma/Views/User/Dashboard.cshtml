@@ -14,72 +14,78 @@
     }
     else
     {
+        foreach (var item in @ViewBag.User.ListOfProjects)
+        {
+            <div class="projects-container-element">
+                <p>Tytuł: @item.Title</p>
+                <p>Opis: @item.Description</p>
+                <button class="btn btn-primary" type="submit" name="button">Otwórz projekt</button>
+            </div>
+            <br />
+
+        }
         <div class="projects-container">
-
-            @foreach (var item in @ViewBag.User.ListOfProjects)
-            {
-                <div class="projects-container-element">
-                    <p>Tytuł: @item.Title</p>
-                    <p>Opis: @item.Description</p>
-                    <button class="btn btn-primary" type="submit" name="button">Otwórz projekt</button>
-                </div>
-                <br />
-
-            }
-
-
             <button id="btnShowModal" class="btn btn-sm btn-default" data-toggle="modal" data-target="#myModal">
                 Dodaj kolejny projekt
                 <i class="fas fa-plus"></i>
             </button>
 
-
             <!-- Modal -->
-            @using (@Html.BeginForm("CreateProject", "Project", new { userEmail = @ViewBag.User.Email }, FormMethod.Post, new { @class = "register" }))
-            {
-                @Html.AntiForgeryToken()
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+@using (@Html.BeginForm("CreateProject", "Project", new { userEmail = @ViewBag.User.Email }, FormMethod.Post, new { @class = "register" }))
+{
+    @Html.AntiForgeryToken()
 
-                <div class="modal fade" id="myModal" role="dialog">
-                    <div class="modal-dialog">
-
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Modal Header</h4>
-                            </div>
-                            <div class="modal-body">
-                                <p>Dodaj projekt</p>
-
-                                <form class="form-horizontal">
-                                    <div class="form-group">
-                                        <input type="text" name="Title" class="form-control" id="titleField" placeholder="Tytuł projektu" required/>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="email" name="PromoEmail" class="form-control" id="promoemailField" placeholder="Email do promotora" required/>
-                                    </div>
-                                    <div class="form-group">
-                                        <textarea class="form-control" name="Description" id="projectdescField" placeholder="Opis projektu" maxlength="200"></textarea>
-                                    </div>
-                                </form>
-
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
-                                <button class="btn btn-primary" type="submit" name="button">Dodaj projekt</button>
-                            </div>
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Modal Header</h4>
                         </div>
+                        <div class="modal-body">
+                            <h4>Dodaj projekt</h4>
 
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <input type="text" name="Title" class="form-control" id="titleField" placeholder="Tytuł projektu" required/>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="PromoName" class="form-control" id="promonameField" placeholder="Imię i nazwisko promotora" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" name="PromoEmail" class="form-control" id="promolastnameField" placeholder="Email promotora" />
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" name="Description" id="projectdescField" placeholder="Opis projektu" maxlength="200"></textarea>
+                                </div>
+                                <label>Wyznacz deadline</label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="deadlineDayField" placeholder="Dzień" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="deadlineMonthField" placeholder="Miesiąc" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="deadlineYearField" placeholder="Rok" />
+                                </div>
+                            </form>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+                            <button class="btn btn-primary" type="submit" name="button">Dodaj projekt</button>
+                        </div>
                     </div>
+}
                 </div>
-            }
 
-
-
+            </div>
 
         </div>
     }
+    
 </section>
 
 
@@ -92,22 +98,23 @@
             <!--foreach-->
         </div>
     </div>
-
     <div class="reminder-stats">
 
     </div>
 </div>
 
 <section class="protip-slider">
-    <div id="intro">
-        <div class="slide">
-            <p>First quote</p>
-        </div>
-        <div class="slide">
-            <p>Second quote</p>
-        </div>
-        <div class="slide">
-            <p>Third quote</p>
-        </div>
+
+    <div class="slide">
+        <p>Pamiętaj o częstym zapisywaniu swojej pracy.</p>
+    </div>
+    <div class="slide">
+        <p>Częste konsultacje z promotorem to dobry pomysł.</p>
+    </div>
+    <div class="slide">
+        <p>Nie obijaj się! Stay Focused.</p>
+    </div>
+    <div class="slide">
+        <p>Nie próbuj, rób albo nie rób, nie ma próbowania. </p>
     </div>
 </section>
