@@ -118,6 +118,24 @@ section {
     .coaching img {
         width: 100%;
         height: auto;
+        max-width: 600px;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .coaching .coaching-content {
+        width: 75%;
+    }
+
+    .coaching .coaching-content ul {
+       margin-bottom: 45px;
+       font-size: 16px;
+    }
+
+    .coaching .coaching-content a {
+        margin: 0 auto;
+        width: 50%;
+        display: block;
     }
 
     .features:after, .coaching:after {
@@ -351,4 +369,9 @@ footer {
     width: 100px;
     left: 50%;
 
+}
+/*MODAL*/
+.modal-body .form-horizontal .form-group {
+    width: 400px;
+    margin: 0 auto 15px;
 }
