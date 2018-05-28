@@ -360,18 +360,36 @@ footer {
 .protip-slider {
     position: relative;
     height: 100px;
-    background: #ccc;
+    background: #ededed;
+    margin-bottom: 0;
 }
 
-.protip-slider .slide {
-    position: absolute;
-    top: 40px;
-    width: 100px;
-    left: 50%;
+    .protip-slider .slide {
+        position: absolute;
+        top: 40px;
+        width: 500px;
+        left: 50%;
+        margin-left: -250px;
+        color: #f4a53d;
+        font-size: 18px;
+        font-weight: bold;
+    }
 
+@media(max-width: 480px) {
+    .protip-slider .slide {
+        width: 100%;
+        left: 50%;
+        margin-left: -50%;
+    }
 }
 /*MODAL*/
 .modal-body .form-horizontal .form-group {
     width: 400px;
     margin: 0 auto 15px;
+}
+
+/*ALERTS*/
+.alert {
+    width: 50%;
+    margin: 0 auto;
 }
