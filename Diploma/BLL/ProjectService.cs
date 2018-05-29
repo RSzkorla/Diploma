@@ -9,10 +9,19 @@ namespace Diploma.BLL
 {
     public class ProjectService : IProjectService
     {
-        public void Create(Project project, string userEmail)
+        public void Create(Project project, Promo promo, string userEmail)
         {
             using (var context = new DiplomaDBContext())
             {
+                var prom = context.ListOfPromos.Where(x => x.Id == promo.Id).FirstOrDefault();
+                if (prom == null)
+                {
+                        context.ListOfPromos.Add(promo);
+                        context.SaveChanges();
+                }
+
+                context.ListOfProjects.Add(project);
+
                 var user = context.ListOfUsers.SingleOrDefault(x => x.Email == userEmail);
                 user?.ListOfProjects.Add(project);
 
@@ -35,19 +44,22 @@ namespace Diploma.BLL
             }
         }
 
-        public void Delete(Guid id, string userEmail)
+        public void Delete(Project project, string userEmail)
         {
             using (var context = new DiplomaDBContext())
             {
-                var user = context.ListOfUsers.SingleOrDefault(x => x.Email == userEmail);
+                var proj = context.ListOfProjects.Where(x => x.Id == project.Id).FirstOrDefault(); 
+
+                var user = context.ListOfUsers.Where(x => x.Email==userEmail).FirstOrDefault();
+
                 if (user != null)
                 {
-                    var project = context.ListOfProjects.SingleOrDefault(x => x.Id == id);
-                    user.ListOfProjects
-                      .Remove(project);
+                    proj.Promo = null;
+                    context.ListOfProjects.Attach(proj);
+                    user.ListOfProjects.Remove(proj);
+                    context.ListOfProjects.Remove(proj);
+                    context.SaveChanges();
                 }
-
-                context.SaveChangesAsync();
             }
         }
 

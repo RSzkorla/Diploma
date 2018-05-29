@@ -137,12 +137,12 @@ namespace Diploma.Controllers
 
         //z bazą danych
         [AutorizationService]
-        public ActionResult Dashboard()
+        public ActionResult Dashboard(User user)
         {
-            string eMail = Session["user"].ToString();
-            User currentUser = db.ListOfUsers.Where(x => x.Email == eMail).FirstOrDefault();
-            ViewBag.User = currentUser;
-            return View();
+                string eMail = Session["user"].ToString();
+                User currentUser = db.ListOfUsers.Where(x => x.Email == eMail).FirstOrDefault();
+                ViewBag.User = currentUser;
+                return View();
         }
 
         //bez bazy
