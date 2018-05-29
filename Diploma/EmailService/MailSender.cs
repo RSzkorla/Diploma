@@ -45,6 +45,31 @@ namespace Diploma.EmailService
             }
         }
 
+      public static void BuildTaskEmailToPromo(string userEmail, Guid taskId, Guid promoId, string messageToPromo = "")
+      {
+        using (var db = new DiplomaDBContext())
+        {
+          string body =
+            System.IO.File.ReadAllText(HostingEnvironment.MapPath("~/EmailTemplates/") + "ToPromo" + ".cshtml");
+          var user = db.ListOfUsers.FirstOrDefault(x => x.Email == userEmail);
+
+          if (user != null)
+          {
+            var task = db.ListOfProjectTasks.SingleOrDefault(x => x.Id == taskId);
+            body = body.Replace("$$Task.Title", task.Title);
+            body = body.Replace("$$Task.Description", task.Description);
+            body = body.Replace("$$Message", messageToPromo);
+            body = body.Replace("$$User.FirstName", user.FirstName);
+            body = body.Replace("$$User.LastName", user.LastName);
+
+            var title = user.FirstName + " " + user.LastName + " - Prośba o pomoc. Diploma";
+            var emailToPromo = db.ListOfPromos.SingleOrDefault(x => x.Id == promoId).Email;
+
+          BuildEmailTemlplate(title, body, emailToPromo);
+          }
+        }
+      }
+
         public static void BuildEmailTemlplate(string subjectText, string bodyText, string sendTo)
         {
             string from, to, bcc, cc, subject, body;
