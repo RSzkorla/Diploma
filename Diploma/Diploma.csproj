@@ -269,6 +269,7 @@
     </Content>
     <Content Include="EmailTemplates\Text.cshtml" />
     <Content Include="EmailTemplates\Password.cshtml" />
+    <Content Include="EmailTemplates\ToPromo.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
