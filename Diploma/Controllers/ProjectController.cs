@@ -13,40 +13,46 @@ namespace Diploma.Controllers
     {
         IProjectService service = new ProjectService();
         // GET: Project
-        public ActionResult Index()
+        public ActionResult Index(Guid projectId, string userEmail)
         {
+            var project = service.GetById(projectId);
+            ViewBag.Project = project;
+            ViewBag.Id = projectId;
+            ViewBag.UserEmail = userEmail;
+
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public ActionResult CreateProject(CreateProjectVM model, string userEmail)
         {
             if (ModelState.IsValid)
             {
                 var promo = new Promo() { Name = model.PromoName, Email = model.PromoEmail };
-                using (Database.DiplomaDBContext context = new Database.DiplomaDBContext())
+
+                Project project = new Project()
                 {
-                    context.ListOfPromos.Add(promo);
-                    context.SaveChanges();
+                    Title = model.Title,
+                    Description = model.Description,
+                    Promo = promo,
+                    StartDate = DateTime.Now,
+                    DeadLine = DateTime.Now,
+                    EndDate = DateTime.Now,
+                };
 
+                service.Create(project, promo, userEmail);
+            }
+            return RedirectToAction("Dashboard", "User");
+        }
 
-                    Project project = new Project()
-                    {
-                        Title = model.Title,
-                        Description = model.Description,
-                        Promo = promo,
-                        StartDate = DateTime.Now,
-                        DeadLine = DateTime.Now,
-                        EndDate = DateTime.Now,
-                    };
-
-                    context.ListOfProjects.Add(project);
-                    context.ListOfUsers.Where(x=>x.Email==userEmail).First().ListOfProjects.Add(project);
-                    context.SaveChanges();
-                }
-                return RedirectToAction("Dashboard", "User");
+        [HttpPost]
+        public ActionResult DeleteProject(Guid id, string userEmail)
+        {
+            if (id != null)
+            {
+                var project = service.GetById(id);
+                service.Delete(project, userEmail);
             }
             return RedirectToAction("Dashboard", "User");
         }

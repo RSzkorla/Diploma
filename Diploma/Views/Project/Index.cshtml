@@ -4,5 +4,11 @@
 }
 
 @ViewBag.Project.Title
-<h2>Index</h2>
+@ViewBag.UserEmail
+
+    @using (@Html.BeginForm("DeleteProject", "Project", new { id = @ViewBag.Id, userEmail = @ViewBag.UserEmail }, FormMethod.Post))
+    {
+        <button class="btn btn-sm btn-default" type="submit">Usuń projekt</button>
+    }
+    <h2>Index</h2>
 
