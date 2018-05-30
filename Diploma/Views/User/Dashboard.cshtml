@@ -33,7 +33,7 @@
                         <div class="modal-body">
                             <h4>Dodaj projekt</h4>
 
-                            <form class="form-horizontal">
+                            <form class="form-horizontal" id="newProjectModalForm">
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="titleField" placeholder="Tytuł projektu" />
                                 </div>
@@ -56,14 +56,13 @@
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="deadlineYearField" placeholder="Rok" />
                                 </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+                                    <button class="btn btn-primary" type="submit" name="button">Dodaj projekt</button>
+                                </div>
                             </form>
-
-
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
-                            <button class="btn btn-primary" type="submit" name="button">Dodaj projekt</button>
-                        </div>
+                        
                     </div>
 
                 </div>
