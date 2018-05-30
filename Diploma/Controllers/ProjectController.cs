@@ -40,8 +40,8 @@ namespace Diploma.Controllers
                     Description = model.Description,
                     Promo = promo,
                     StartDate = DateTime.Now,
-                    DeadLine = DateTime.Now,
-                    EndDate = DateTime.Now,
+                    DeadLine = DateTime.Parse($"{model.Day}.{model.Month}.{model.Year}"),
+                    EndDate = DateTime.Now
                 };
 
                 service.Create(project, promo, userEmail);
