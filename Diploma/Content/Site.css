@@ -32,6 +32,17 @@ textarea {
     max-width: 400px;
 }
 
+.form-control:focus {
+    border-color: #ef9826;
+}
+
+.navbar-inverse .navbar-brand:hover,
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-brand:focus,
+.navbar-inverse .navbar-nav > li > a:focus {
+    color: #f7ad4c;
+}
+
 .navbar {
     margin-bottom: 0;
 }
@@ -54,13 +65,11 @@ textarea {
     color: #fff;
 }
 
-
     .btn:hover {
         background-color: #f7ad4c;
         border-color: #f7ad4c;
         color: #fff;
     }
-
 
     .btn:focus {
         background-color: #ef9826;
