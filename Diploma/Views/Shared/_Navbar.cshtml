@@ -11,11 +11,12 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                <li>@Html.ActionLink("About", "About", "Home")</li>
-                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                <li>@Html.ActionLink("Blog", "Index", "Home")</li>
+                <li>@Html.ActionLink("Praca", "About", "Home")</li>
+                <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
             </ul>
-            @*LOGOWANIE*@
+            <div class="navbar-right">
+                @*LOGOWANIE*@
             @if (Session["loginSuccess"] == null)
             {
                 using (@Html.BeginForm("Login", "User", FormMethod.Post, new { @class = "navbar-loginform" }))
@@ -34,13 +35,15 @@
                     </div>
                 }
             }
+            </div>
 
             @if (Session["loginSuccess"] != null)
             {
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Wyloguj", "Logout", "User", null, new { @class = "btn" })</li>
-                </ul>
+                <div class="nav navbar-nav navbar-loginform">
+                    @Html.ActionLink("Wyloguj", "Logout", "User", null, new { @class = "btn" })
+                </div>
             }
+            
 
         </div>
     </div>

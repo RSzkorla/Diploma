@@ -44,6 +44,10 @@ textarea {
     background: #2d2d2d;
 }
 
+#emailLoginField.form-control {
+    width: 280px;
+
+}
 .btn {
     background-color: #f4a53d;
     border-color: #ef9826;
@@ -336,6 +340,9 @@ footer {
         color: #b2b7ba;
     }
 @media(max-width: 480px) {
+    #emailLoginField.form-control {
+        width: 100%;
+    }
     .features:after, .coaching:after {
         width: 360px;
         margin-left: -180px;
