@@ -11,7 +11,10 @@ namespace Diploma.Controllers
 {
     public class ProjectController : Controller
     {
-        IProjectService service = new ProjectService();
+        private readonly IProjectService service;
+
+        public ProjectController() => service = new ProjectService();
+
         // GET: Project
         public ActionResult Index(Guid projectId, string userEmail)
         {
@@ -31,17 +34,21 @@ namespace Diploma.Controllers
             {
                 var promo = new Promo() { Name = model.PromoName, Email = model.PromoEmail };
 
+                var date = Convert.ToString($"{model.Day}/{model.Month}/{model.Year}");
+                var deadline = DateTime.Parse(date);
+
                 Project project = new Project()
                 {
                     Title = model.Title,
                     Description = model.Description,
                     Promo = promo,
                     StartDate = DateTime.Now,
-                    DeadLine = DateTime.Now,
-                    EndDate = DateTime.Now,
+                    DeadLine = deadline,
+                    EndDate = DateTime.Now
                 };
 
                 service.Create(project, promo, userEmail);
+                
             }
             return RedirectToAction("Dashboard", "User");
         }
