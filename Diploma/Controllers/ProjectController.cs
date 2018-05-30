@@ -34,17 +34,21 @@ namespace Diploma.Controllers
             {
                 var promo = new Promo() { Name = model.PromoName, Email = model.PromoEmail };
 
+                var date = Convert.ToString($"{model.Day}/{model.Month}/{model.Year}");
+                var deadline = DateTime.Parse(date);
+
                 Project project = new Project()
                 {
                     Title = model.Title,
                     Description = model.Description,
                     Promo = promo,
                     StartDate = DateTime.Now,
-                    DeadLine = DateTime.Parse($"{model.Day}.{model.Month}.{model.Year}"),
+                    DeadLine = deadline,
                     EndDate = DateTime.Now
                 };
 
                 service.Create(project, promo, userEmail);
+                
             }
             return RedirectToAction("Dashboard", "User");
         }
