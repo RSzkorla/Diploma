@@ -40,6 +40,10 @@ textarea {
     margin-top: 8px;
 }
 
+.navbar-inverse {
+    background: #2d2d2d;
+}
+
 .btn {
     background-color: #f4a53d;
     border-color: #ef9826;
@@ -173,6 +177,11 @@ section {
     background-color: inherit;
     width: 50%;
 }
+    .timeline-element-container .icon-container {
+        color: #f4a53d;
+        text-align: center;
+        font-size: 32px;
+    }
 
     .timeline-element-container::after {
         content: '';
