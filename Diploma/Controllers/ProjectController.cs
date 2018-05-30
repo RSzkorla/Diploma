@@ -11,7 +11,10 @@ namespace Diploma.Controllers
 {
     public class ProjectController : Controller
     {
-        IProjectService service = new ProjectService();
+        private readonly IProjectService service;
+
+        public ProjectController() => service = new ProjectService();
+
         // GET: Project
         public ActionResult Index(Guid projectId, string userEmail)
         {

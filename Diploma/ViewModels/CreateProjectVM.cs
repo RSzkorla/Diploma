@@ -12,8 +12,9 @@ namespace Diploma.ViewModels
         [Required(ErrorMessage = "To pole jest wymagane.")]
         public string Title { get; set; }
         public string Description { get; set; }
+        [Required(ErrorMessage = "To pole jest wymagane.")]
         public string PromoName { get; set; }
-
+        [Required(ErrorMessage = "To pole jest wymagane.")]
         public string PromoEmail { get; set; }
     }
 }
