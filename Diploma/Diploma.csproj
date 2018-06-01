@@ -218,6 +218,7 @@
     <Compile Include="Migrations\201805261837535_Initial.Designer.cs">
       <DependentUpon>201805261837535_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\UndoneTaskPerProject.cs" />
     <Compile Include="Security\AuthorizationService.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Database\DiplomaDBContext.cs" />

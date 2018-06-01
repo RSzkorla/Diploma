@@ -89,5 +89,30 @@ namespace Diploma.BLL
                 return null;
             }
         }
+
+      public UndoneTaskPerProject GetUndoneTasks(Guid id)
+      {
+        using (var context = new DiplomaDBContext())
+        {
+          var project = context.ListOfProjects.SingleOrDefault(x => x.Id == id);
+          var tastService = new ProjectTaskService();
+          var listOfUndoneTasks = tastService.GetAllByProject(id).Where(x => x.EndDate == new DateTime()).ToList();
+          return new UndoneTaskPerProject() {Project = project, UndoneProjectTasks = listOfUndoneTasks};
+        }
+
+      }
+
+      public IEnumerable<UndoneTaskPerProject> GetAllUndoneTasksByUser(string userEmail)
+      {
+        using (var context = new DiplomaDBContext())
+        {
+          var user = context.ListOfUsers.SingleOrDefault(x => x.Email == userEmail);
+          if (user != null)
+            foreach (var project in user.ListOfProjects)
+            {
+              yield return GetUndoneTasks(project.Id);
+            }
+        }
+      }
     }
 }
