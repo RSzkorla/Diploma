@@ -376,9 +376,9 @@ footer {
 /*.projects-container {
 }*/
 
-.projects-container button.btn {
+/*.projects-container button.btn {
     position: relative;
-}
+}*/
 
     .projects-container button.btn:after {
         position: absolute;
@@ -389,12 +389,16 @@ footer {
     }
 
 .projects-container-element {
-    margin: 0 auto 16px;
+    margin-bottom: 16px;
     background: #efe9e1;
     width: 300px;
     text-align: center;
     padding: 20px 0;
     border: 1px solid #f2d5ae;
+    font-size: 16px;
+}
+.modal-button {
+    height: 50px;
     font-size: 16px;
 }
 /*SLIDER*/
@@ -418,7 +422,7 @@ footer {
 
 @media(max-width: 480px) {
     .modal-button {
-        height: 50px;
+        text-align: center;
         width:75%;
         font-size: 14px;
     }
@@ -427,6 +431,11 @@ footer {
         padding-right: 8px;
         text-align: center;
     }
+
+    .projects-container-element {
+        margin: 0 auto 16px;
+    }
+
     .protip-slider .slide {
         width: 100%;
         left: 50%;
