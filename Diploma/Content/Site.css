@@ -389,7 +389,7 @@ footer {
     }
 
 .projects-container-element {
-    margin-bottom: 16px;
+    margin: 0 auto 16px;
     background: #efe9e1;
     width: 300px;
     text-align: center;
@@ -417,6 +417,11 @@ footer {
     }
 
 @media(max-width: 480px) {
+    .modal-button {
+        height: 50px;
+        width:75%;
+        font-size: 14px;
+    }
     .body-content {
         padding-left: 8px;
         padding-right: 8px;
@@ -428,6 +433,7 @@ footer {
         margin-left: -50%;
     }
 }
+
 /*MODAL*/
 .modal-body .form-horizontal .form-group {
     width: 400px;
