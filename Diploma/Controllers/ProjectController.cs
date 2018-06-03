@@ -1,8 +1,10 @@
 ﻿using Diploma.BLL;
 using Diploma.Models;
+using Diploma.Security;
 using Diploma.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,16 +14,25 @@ namespace Diploma.Controllers
     public class ProjectController : Controller
     {
         private readonly IProjectService service;
+        private readonly IProjectTaskService taskService;
 
-        public ProjectController() => service = new ProjectService();
 
-        // GET: Project
+        public ProjectController()
+        {
+            service = new ProjectService();
+            taskService = new ProjectTaskService();
+        }
+
+        [AutorizationService]
         public ActionResult Index(Guid projectId, string userEmail)
         {
             var project = service.GetById(projectId);
             ViewBag.Project = project;
             ViewBag.Id = projectId;
             ViewBag.UserEmail = userEmail;
+
+            var tasks = taskService.GetAllByProject(projectId);
+            ViewBag.Tasks = tasks;
 
             return View();
         }
@@ -44,7 +55,10 @@ namespace Diploma.Controllers
                     Promo = promo,
                     StartDate = DateTime.Now,
                     DeadLine = deadline,
-                    EndDate = DateTime.Now
+                    EndDate = (DateTime)SqlDateTime.MinValue,
+
+
+                    ListOfProjectTasks = new List<ProjectTask>()
                 };
 
                 service.Create(project, promo, userEmail);
@@ -58,8 +72,7 @@ namespace Diploma.Controllers
         {
             if (id != null)
             {
-                var project = service.GetById(id);
-                service.Delete(project, userEmail);
+                service.Delete(id, userEmail);
             }
             return RedirectToAction("Dashboard", "User");
         }
