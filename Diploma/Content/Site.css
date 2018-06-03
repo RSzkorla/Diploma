@@ -388,6 +388,15 @@ footer {
         color: red;
     }
 
+.projects-container-element {
+    margin-bottom: 16px;
+    background: #efe9e1;
+    width: 300px;
+    text-align: center;
+    padding: 20px 0;
+    border: 1px solid #f2d5ae;
+    font-size: 16px;
+}
 /*SLIDER*/
 .protip-slider {
     position: relative;
@@ -408,6 +417,11 @@ footer {
     }
 
 @media(max-width: 480px) {
+    .body-content {
+        padding-left: 8px;
+        padding-right: 8px;
+        text-align: center;
+    }
     .protip-slider .slide {
         width: 100%;
         left: 50%;

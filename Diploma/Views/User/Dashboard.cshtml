@@ -17,12 +17,12 @@
         foreach (var item in @ViewBag.User.ListOfProjects)
         {
             <div class="projects-container-element">
-                <p>Tytuł: @item.Title</p>
-                <p>Opis: @item.Description</p>
-                <p>Deadline: @item.DeadLine.ToString("dd.mm.yyyy")</p>
-                @Html.ActionLink("Otwórz projekt", "Index", "Project", new { projectId = item.Id, userEmail = @ViewBag.User.Email }, new { @class = "btn btn-primary" })
+                    <p>Tytuł: @item.Title</p>
+                    <p>Opis: @item.Description</p>
+                    <p>Deadline: @item.DeadLine.ToString("dd.mm.yyyy")</p>
+                    @Html.ActionLink("Otwórz projekt", "Index", "Project", new { projectId = item.Id, userEmail = @ViewBag.User.Email }, new { @class = "btn btn-primary" })
             </div>
-            <br />
+            
 
         }
         <div class="projects-container">
