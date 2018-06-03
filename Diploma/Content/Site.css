@@ -272,14 +272,12 @@ section {
         left: 31px;
     }
 
- 
     .timeline-element-container {
         width: 100%;
         padding-left: 70px;
         padding-right: 25px;
     }
 
-       
         .timeline-element-container::before {
             left: 60px;
             border: medium solid white;
@@ -287,12 +285,10 @@ section {
             border-color: transparent white transparent transparent;
         }
 
-   
     .left::after, .right::after {
         left: 19px;
     }
 
-   
     .right {
         left: 0%;
     }
