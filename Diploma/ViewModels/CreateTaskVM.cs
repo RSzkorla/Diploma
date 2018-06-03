@@ -13,9 +13,10 @@ namespace Diploma.ViewModels
         public string Title { get; set; }
         [Required(ErrorMessage = "To pole jest wymagane.")]
         public string Description { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public DateTime DeadLine { get; set; }
-        public TaskTag Tag { get; set; }
+
+        public int Day { get; set; }
+        public int Month { get; set; }
+        public int Year { get; set; }
+
     }
 }

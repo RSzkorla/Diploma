@@ -3,12 +3,63 @@
     ViewBag.Title = "Index";
 }
 
-@ViewBag.Project.Title
-@ViewBag.UserEmail
+Użytkownik: @ViewBag.UserEmail
+Nazwa projektu: @ViewBag.Project.Title
+<br/>
+<br/>
+Taski:
 
-    @using (@Html.BeginForm("DeleteProject", "Project", new { id = @ViewBag.Id, userEmail = @ViewBag.UserEmail }, FormMethod.Post))
-    {
-        <button class="btn btn-sm btn-default" type="submit">Usuń projekt</button>
-    }
-    <h2>Index</h2>
+@foreach (var item in ViewBag.Tasks)
+{
+    <br />
+
+    <div class="projects-container-element">
+        <p>Tytuł: @item.Title</p>
+        <p>Opis: @item.Description</p>
+        <p>Deadline: @item.DeadLine.ToString("dd.mm.yyyy")</p>
+    </div>
+        <br />
+
+
+}
+
+
+@using (@Html.BeginForm("DeleteProject", "Project", new { id = @ViewBag.Id, userEmail = @ViewBag.UserEmail }, FormMethod.Post))
+{
+    <button class="btn btn-sm btn-default" type="submit">Usuń projekt</button>
+}
+
+@using (@Html.BeginForm("CreateTask", "Task", new { id = @ViewBag.Id, userEmail = @ViewBag.UserEmail }, FormMethod.Post))
+{
+
+    <div class="register-content">
+        <h4>Dodaj projekt</h4>
+
+        <form class="form-horizontal">
+            <div class="form-group">
+                <input type="text" name="Title" class="form-control" id="titleField" placeholder="Tytuł projektu" required />
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" name="Description" id="projectdescField" placeholder="Opis projektu" maxlength="200" required></textarea>
+            </div>
+            <label>Wyznacz deadline</label>
+            <div class="form-group">
+                <input type="number" name="Day" class="form-control" id="deadlineDayField" placeholder="Dzień" required />
+            </div>
+            <div class="form-group">
+                <input type="number" name="Month" class="form-control" id="deadlineMonthField" placeholder="Miesiąc" required />
+            </div>
+            <div class="form-group">
+                <input type="number" name="Year" class="form-control" id="deadlineYearField" placeholder="Rok" required />
+            </div>
+        </form>
+
+        <button class="btn btn-sm btn-default" type="submit">Dodaj task</button>
+
+    </div>
+
+}
+
+
+<h2>Index</h2>
 
