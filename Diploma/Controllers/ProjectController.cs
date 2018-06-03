@@ -1,8 +1,10 @@
 ﻿using Diploma.BLL;
 using Diploma.Models;
+using Diploma.Security;
 using Diploma.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -15,7 +17,7 @@ namespace Diploma.Controllers
 
         public ProjectController() => service = new ProjectService();
 
-        // GET: Project
+        [AutorizationService]
         public ActionResult Index(Guid projectId, string userEmail)
         {
             var project = service.GetById(projectId);
@@ -44,7 +46,7 @@ namespace Diploma.Controllers
                     Promo = promo,
                     StartDate = DateTime.Now,
                     DeadLine = deadline,
-                    EndDate = DateTime.Now
+                    EndDate = (DateTime)SqlDateTime.MinValue
                 };
 
                 service.Create(project, promo, userEmail);

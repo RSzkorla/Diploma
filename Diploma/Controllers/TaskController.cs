@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Diploma.Security;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +9,16 @@ namespace Diploma.Controllers
 {
     public class TaskController : Controller
     {
-        // GET: Task
+        [AutorizationService]
         public ActionResult Index()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateTask()
+        {
+            return View("Index");
         }
     }
 }
