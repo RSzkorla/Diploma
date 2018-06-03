@@ -9,16 +9,16 @@ namespace Diploma.BLL
 {
     public class ProjectTaskService : IProjectTaskService
     {
-        public void Create(Guid projectId, ProjectTask newpProjectTask)
+        public void Create(Guid projectId, ProjectTask newProjectTask)
         {
             using (var context = new DiplomaDBContext())
             {
                 var project = context.ListOfProjects.SingleOrDefault(x => x.Id == projectId);
                 if (project != null)
                 {
-                    project.ListOfProjectTasks.Add(newpProjectTask);
+                    project.ListOfProjectTasks.Add(newProjectTask);
                 }
-                context.SaveChangesAsync();
+                context.SaveChanges();
             }
         }
 
@@ -45,6 +45,7 @@ namespace Diploma.BLL
                 {
                     var projectTask = project.ListOfProjectTasks.SingleOrDefault(x => x.Id == projectTaskId);
                     project.ListOfProjectTasks.Remove(projectTask);
+                    context.ListOfProjectTasks.Remove(projectTask);
                 }
                 context.SaveChangesAsync();
             }

@@ -10,9 +10,9 @@ using System.Web;
 
 namespace Diploma.BLL
 {
-    public static class AccountService
+    public class AccountService : IAccountService
     {
-        public static User GetByKey(string userEmail)
+        public User GetByKey(string userEmail)
         {
             User user = new User();
             using (DiplomaDBContext db = new DiplomaDBContext())
@@ -22,17 +22,17 @@ namespace Diploma.BLL
             }
         }
 
-        public static void Add(User user)
+        public void Add(User user)
         {
             using (DiplomaDBContext db = new DiplomaDBContext())
             {
-                user.Password = PasswordHash.HashPassword(user.Password);
+                user.Password = HashService.HashPassword(user.Password);
                 db.ListOfUsers.Add(user);
                 db.SaveChanges();
             }
         }
 
-        public static void Register(UserRegistrationVM user)
+        public void Register(UserRegistrationVM user)
         {
             User newUser = new User()
             {
@@ -47,23 +47,13 @@ namespace Diploma.BLL
             Add(newUser);
         }
 
-        public static string GenerateUserHash(User user)
-        {
-            if (user != null)
-            {
-                return $"{user.Email}{user.ActivationId}".GetHashCode().ToString();
-            }
-            else
-                return null;
-        }
-
-        public static void ActivateAccount(string userEmail, string hash)
+        public void ActivateAccount(string userEmail, string hash)
         {
             using (DiplomaDBContext db = new DiplomaDBContext())
             {
                 User user = db.ListOfUsers.Where(x => x.Email == userEmail).FirstOrDefault();
 
-                if (GenerateUserHash(user) == hash)
+                if (HashService.GenerateUserHash(user) == hash)
                 {
                     user.EmailActivated = true;
                     db.SaveChanges();
@@ -72,13 +62,13 @@ namespace Diploma.BLL
             }
         }
 
-        public static void ChangePassword(string userEmail, string newPassword)
+        public void ChangePassword(string userEmail, string newPassword)
         {
             using (DiplomaDBContext db = new DiplomaDBContext())
             {
                 User user = db.ListOfUsers.Where(x => x.Email == userEmail).FirstOrDefault();
 
-                user.Password = PasswordHash.HashPassword(newPassword);
+                user.Password = HashService.HashPassword(newPassword);
                 db.SaveChanges();
             }
         }

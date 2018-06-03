@@ -1,8 +1,10 @@
 ﻿using Diploma.BLL;
 using Diploma.Models;
+using Diploma.Security;
 using Diploma.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,14 +13,26 @@ namespace Diploma.Controllers
 {
     public class ProjectController : Controller
     {
-        IProjectService service = new ProjectService();
-        // GET: Project
+        private readonly IProjectService service;
+        private readonly IProjectTaskService taskService;
+
+
+        public ProjectController()
+        {
+            service = new ProjectService();
+            taskService = new ProjectTaskService();
+        }
+
+        [AutorizationService]
         public ActionResult Index(Guid projectId, string userEmail)
         {
             var project = service.GetById(projectId);
             ViewBag.Project = project;
             ViewBag.Id = projectId;
             ViewBag.UserEmail = userEmail;
+
+            var tasks = taskService.GetAllByProject(projectId);
+            ViewBag.Tasks = tasks;
 
             return View();
         }
@@ -31,17 +45,24 @@ namespace Diploma.Controllers
             {
                 var promo = new Promo() { Name = model.PromoName, Email = model.PromoEmail };
 
+                var date = Convert.ToString($"{model.Day}/{model.Month}/{model.Year}");
+                var deadline = DateTime.Parse(date);
+
                 Project project = new Project()
                 {
                     Title = model.Title,
                     Description = model.Description,
                     Promo = promo,
                     StartDate = DateTime.Now,
-                    DeadLine = DateTime.Now,
-                    EndDate = DateTime.Now,
+                    DeadLine = deadline,
+                    EndDate = (DateTime)SqlDateTime.MinValue,
+
+
+                    ListOfProjectTasks = new List<ProjectTask>()
                 };
 
                 service.Create(project, promo, userEmail);
+                
             }
             return RedirectToAction("Dashboard", "User");
         }
@@ -51,8 +72,7 @@ namespace Diploma.Controllers
         {
             if (id != null)
             {
-                var project = service.GetById(id);
-                service.Delete(project, userEmail);
+                service.Delete(id, userEmail);
             }
             return RedirectToAction("Dashboard", "User");
         }

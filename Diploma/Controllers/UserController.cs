@@ -5,7 +5,6 @@ using Diploma.Models;
 using Diploma.Security;
 using Diploma.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -14,6 +13,9 @@ namespace Diploma.Controllers
     public class UserController : Controller
     {
         private DiplomaDBContext db = new DiplomaDBContext();
+
+        private readonly IAccountService service;
+        public UserController() => service = new AccountService();
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -25,7 +27,7 @@ namespace Diploma.Controllers
             {
                 try
                 {
-                    AccountService.Register(newUser);
+                    service.Register(newUser);
                     registrationMessage = "Na podany adres e-mail została wysłana wiadomość weryfikacjyjna.";
                     MailSender.BuildRegistrationEmailTemlplate(newUser.Email);
                     return RedirectToAction("Index", "Home", new { message = registrationMessage });
@@ -44,9 +46,9 @@ namespace Diploma.Controllers
 
         public ActionResult Confirm(string userEmail, string hash)
         {
-            if (AccountService.GetByKey(userEmail) != null && AccountService.GenerateUserHash(AccountService.GetByKey(userEmail)) == hash)
+            if (service.GetByKey(userEmail) != null && HashService.GenerateUserHash(service.GetByKey(userEmail)) == hash)
             {
-                AccountService.ActivateAccount(userEmail, hash);
+                service.ActivateAccount(userEmail, hash);
                 return View();
             }
             else
@@ -60,7 +62,7 @@ namespace Diploma.Controllers
         {
             var userExists = db.ListOfUsers.SingleOrDefault(x => x.Email == user.Email && x.EmailActivated == true);
 
-            if (userExists != null && PasswordHash.ValidatePassword(user.Password, userExists.Password) == true)
+            if (userExists != null && HashService.ValidatePassword(user.Password, userExists.Password) == true)
             {
                 Session["loginSuccess"] = true;
                 Session["user"] = user.Email;
@@ -86,7 +88,7 @@ namespace Diploma.Controllers
         {
             if (ModelState.IsValid)
             {
-                AccountService.ChangePassword(userEmail, user.Password);
+                service.ChangePassword(userEmail, user.Password);
                 return RedirectToAction("Index", "Home", new { message = $"{userEmail},{user.Password}"});
             }
             else
@@ -97,7 +99,7 @@ namespace Diploma.Controllers
 
         public ActionResult PasswordRecovery(UserPasswordVM user, string userEmail, string hash)
         {
-            if (AccountService.GetByKey(userEmail) == null || AccountService.GenerateUserHash(AccountService.GetByKey(userEmail)) != hash)
+            if (service.GetByKey(userEmail) == null || HashService.GenerateUserHash(service.GetByKey(userEmail)) != hash)
             {
                 return RedirectToAction("Index", "Home");
             }
