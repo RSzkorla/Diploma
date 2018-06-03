@@ -25,7 +25,7 @@ namespace Diploma.BLL
                 var user = context.ListOfUsers.SingleOrDefault(x => x.Email == userEmail);
                 user?.ListOfProjects.Add(project);
 
-                context.SaveChangesAsync();
+                context.SaveChanges();
             }
         }
 

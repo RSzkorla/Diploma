@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Diploma.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -6,7 +7,7 @@ using System.Web;
 
 namespace Diploma.Security
 {
-    public class PasswordHash
+    public class HashService
     {
         public const int SaltByteSize = 24;
         public const int HashByteSize = 20; // to match the size of the PBKDF2-HMAC-SHA-1 hash 
@@ -55,5 +56,16 @@ namespace Diploma.Security
             pbkdf2.IterationCount = iterations;
             return pbkdf2.GetBytes(outputBytes);
         }
+
+        public static string GenerateUserHash(User user)
+        {
+            if (user != null)
+            {
+                return $"{user.Email}{user.ActivationId}".GetHashCode().ToString();
+            }
+            else
+                return null;
+        }
+
     }
 }
