@@ -5,8 +5,8 @@
 
 Użytkownik: @ViewBag.UserEmail
 Nazwa projektu: @ViewBag.Project.Title
-<br/>
-<br/>
+<br />
+<br />
 Taski:
 
 @foreach (var item in ViewBag.Tasks)
@@ -18,7 +18,7 @@ Taski:
         <p>Opis: @item.Description</p>
         <p>Deadline: @item.DeadLine.ToString("dd.mm.yyyy")</p>
     </div>
-        <br />
+    <br />
 
 
 }
@@ -29,37 +29,9 @@ Taski:
     <button class="btn btn-sm btn-default" type="submit">Usuń projekt</button>
 }
 
-@using (@Html.BeginForm("CreateTask", "Task", new { id = @ViewBag.Id, userEmail = @ViewBag.UserEmail }, FormMethod.Post))
-{
-
-    <div class="register-content">
-        <h4>Dodaj projekt</h4>
-
-        <form class="form-horizontal">
-            <div class="form-group">
-                <input type="text" name="Title" class="form-control" id="titleField" placeholder="Tytuł projektu" required />
-            </div>
-            <div class="form-group">
-                <textarea class="form-control" name="Description" id="projectdescField" placeholder="Opis projektu" maxlength="200" required></textarea>
-            </div>
-            <label>Wyznacz deadline</label>
-            <div class="form-group">
-                <input type="number" name="Day" class="form-control" id="deadlineDayField" placeholder="Dzień" required />
-            </div>
-            <div class="form-group">
-                <input type="number" name="Month" class="form-control" id="deadlineMonthField" placeholder="Miesiąc" required />
-            </div>
-            <div class="form-group">
-                <input type="number" name="Year" class="form-control" id="deadlineYearField" placeholder="Rok" required />
-            </div>
-        </form>
-
-        <button class="btn btn-sm btn-default" type="submit">Dodaj task</button>
-
-    </div>
-
-}
-
-
-<h2>Index</h2>
+<button id="btnShowModal" class="btn btn-sm btn-default modal-button" data-toggle="modal" data-target="#myModal">
+    Dodaj Taska
+    <i class="fas fa-plus"></i>
+</button>
+@{ Html.RenderPartial("_AddingTaskModal");}
 
