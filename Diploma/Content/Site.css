@@ -373,8 +373,9 @@ footer {
 }
 
 /*DASHBOARD*/
-/*.projects-container {
-}*/
+.projects-container {
+    
+}
 
 /*.projects-container button.btn {
     position: relative;
@@ -388,16 +389,23 @@ footer {
         color: red;
     }
 
-.projects-container-element {
+.projects-container-element, .projects-task-container {
     margin-bottom: 16px;
+    margin-right: 16px;
     background: #efe9e1;
     width: 300px;
     text-align: center;
     padding: 20px 0;
     border: 1px solid #f2d5ae;
     font-size: 16px;
+    display: inline-block;
+
 }
-.modal-button {
+
+    .projects-container-element:first-of-type, .projects-task-container:first-of-type {
+
+    }
+    .modal-button {
     height: 50px;
     font-size: 16px;
 }
@@ -419,7 +427,11 @@ footer {
         font-size: 18px;
         font-weight: bold;
     }
-
+@media(max-width: 768px) {
+    .projects-container-element, .projects-task-container {
+        display: block;
+    }
+}
 @media(max-width: 480px) {
     .modal-button {
         text-align: center;

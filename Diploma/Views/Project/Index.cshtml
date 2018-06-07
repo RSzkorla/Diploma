@@ -3,35 +3,28 @@
     ViewBag.Title = "Index";
 }
 
-Użytkownik: @ViewBag.UserEmail
-Nazwa projektu: @ViewBag.Project.Title
-<br />
-<br />
-Taski:
-
-@foreach (var item in ViewBag.Tasks)
-{
-    <br />
-
-    <div class="projects-container-element">
-        <p>Tytuł: @item.Title</p>
-        <p>Opis: @item.Description</p>
-        <p>Deadline: @item.DeadLine.ToString("dd.mm.yyyy")</p>
-    </div>
-    <br />
+<section class="body-content">
+    @foreach (var item in ViewBag.Tasks)
+    {
+       
+        <div class="projects-task-container">
+            <p>Tytuł: @item.Title</p>
+            <p>Opis: @item.Description</p>
+            <p>Deadline: @item.DeadLine.ToString("dd.mm.yyyy")</p>
+        </div>
+       
+    }
 
 
-}
+    @using (@Html.BeginForm("DeleteProject", "Project", new { id = @ViewBag.Id, userEmail = @ViewBag.UserEmail }, FormMethod.Post))
+    {
+        <button class="btn btn-sm btn-default" type="submit">Usuń projekt</button>
+    }
 
+    <button id="btnShowModal" class="btn btn-sm btn-default modal-button" data-toggle="modal" data-target="#myModal">
+        Dodaj Taska
+        <i class="fas fa-plus"></i>
+    </button>
+    @{ Html.RenderPartial("_AddingTaskModal");}
 
-@using (@Html.BeginForm("DeleteProject", "Project", new { id = @ViewBag.Id, userEmail = @ViewBag.UserEmail }, FormMethod.Post))
-{
-    <button class="btn btn-sm btn-default" type="submit">Usuń projekt</button>
-}
-
-<button id="btnShowModal" class="btn btn-sm btn-default modal-button" data-toggle="modal" data-target="#myModal">
-    Dodaj Taska
-    <i class="fas fa-plus"></i>
-</button>
-@{ Html.RenderPartial("_AddingTaskModal");}
-
+</section>

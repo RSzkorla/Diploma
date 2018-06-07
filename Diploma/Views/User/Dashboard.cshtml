@@ -14,25 +14,24 @@
     }
     else
     {
-        foreach (var item in @ViewBag.User.ListOfProjects)
-        {
-            <div class="projects-container-element">
+        <div class="projects-container">
+            @foreach (var item in @ViewBag.User.ListOfProjects)
+            {
+                <div class="projects-container-element">
                     <p>Tytuł: @item.Title</p>
                     <p>Opis: @item.Description</p>
                     <p>Deadline: @item.DeadLine.ToString("dd.mm.yyyy")</p>
                     @Html.ActionLink("Otwórz projekt", "Index", "Project", new { projectId = item.Id, userEmail = @ViewBag.User.Email }, new { @class = "btn btn-primary" })
-            </div>
-            
+                </div>
+            }
+        </div>
 
-        }
-            <div class="projects-container">
-                <button id="btnShowModal" class="btn btn-sm btn-default modal-button" data-toggle="modal" data-target="#myModal">
-                    Dodaj kolejny projekt
-                    <i class="fas fa-plus"></i>
-                </button>
+        <button id="btnShowModal" class="btn btn-sm btn-default modal-button" data-toggle="modal" data-target="#myModal">
+            Dodaj kolejny projekt
+            <i class="fas fa-plus"></i>
+        </button>
 
-                @{ Html.RenderPartial("_AddingProjectModal");}
-            </div>
+        Html.RenderPartial("_AddingProjectModal");
     }
 </section>
 
