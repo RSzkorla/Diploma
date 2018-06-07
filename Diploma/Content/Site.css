@@ -402,13 +402,26 @@ footer {
 
 }
 
-    .projects-container-element:first-of-type, .projects-task-container:first-of-type {
-
+    .projects-container-element:last-of-type, .projects-task-container:last-of-type {
+        margin-right: 16px;
     }
-    .modal-button {
+.modal-button,
+.delete-project-button {
+    width: 150px;
     height: 50px;
     font-size: 16px;
 }
+
+.action-buttons {
+    display: block;
+}
+
+.action-buttons form,
+.action-buttons button
+{
+    display: inline-block;
+}
+
 /*SLIDER*/
 .protip-slider {
     position: relative;
@@ -428,14 +441,23 @@ footer {
         font-weight: bold;
     }
 @media(max-width: 768px) {
-    .projects-container-element, .projects-task-container {
+    .projects-container-element,
+    .projects-task-container 
+    {
         display: block;
+    }
+
+    .action-buttons form,
+    .action-buttons button {
+        display: block;
+        margin: 0 auto;
     }
 }
 @media(max-width: 480px) {
-    .modal-button {
+    .modal-button,
+    .delete-project-button {
         text-align: center;
-        width:75%;
+        width: 75%;
         font-size: 14px;
     }
     .body-content {
