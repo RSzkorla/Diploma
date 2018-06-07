@@ -16,15 +16,22 @@
     }
 
     <div class="action-buttons">
-        @using (@Html.BeginForm("DeleteProject", "Project", new { id = @ViewBag.Id, userEmail = @ViewBag.UserEmail }, FormMethod.Post))
-        {
-            <button class="btn btn-sm btn-default delete-project-button" type="submit">Usuń projekt</button>
-        }
+        
 
         <button id="btnShowModal" class="btn btn-sm btn-default modal-button" data-toggle="modal" data-target="#myModal">
             Dodaj Taska
             <i class="fas fa-plus"></i>
         </button>
+
+        @using (@Html.BeginForm("Dashboard", "User", new { id = @ViewBag.Id, userEmail = @ViewBag.UserEmail }, FormMethod.Post))
+        {
+            <button class="btn btn-sm btn-default delete-project-button" type="submit">Wróc</button>
+        }
+
+        @using (@Html.BeginForm("DeleteProject", "Project", new { id = @ViewBag.Id, userEmail = @ViewBag.UserEmail }, FormMethod.Post))
+        {
+            <button class="btn btn-sm btn-default delete-project-button" type="submit">Usuń projekt</button>
+        }
     </div>
     
     @{ Html.RenderPartial("_AddingTaskModal");}

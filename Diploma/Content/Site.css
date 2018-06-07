@@ -377,10 +377,6 @@ footer {
     
 }
 
-/*.projects-container button.btn {
-    position: relative;
-}*/
-
     .projects-container button.btn:after {
         position: absolute;
         content:"";
@@ -402,12 +398,9 @@ footer {
 
 }
 
-    .projects-container-element:last-of-type, .projects-task-container:last-of-type {
-        margin-right: 16px;
-    }
 .modal-button,
 .delete-project-button {
-    width: 150px;
+    width: 200px;
     height: 50px;
     font-size: 16px;
 }
@@ -419,7 +412,8 @@ footer {
 .action-buttons form,
 .action-buttons button
 {
-    display: inline-block;
+    display: block;
+    margin-bottom: 16px;
 }
 
 /*SLIDER*/
@@ -449,9 +443,9 @@ footer {
 
     .action-buttons form,
     .action-buttons button {
-        display: block;
-        margin: 0 auto;
+        margin: 0 auto 16px;
     }
+
 }
 @media(max-width: 480px) {
     .modal-button,
@@ -470,10 +464,18 @@ footer {
         margin: 0 auto 16px;
     }
 
+    .protip-slider {
+        height: 150px;
+    }
+
     .protip-slider .slide {
-        width: 100%;
-        left: 50%;
-        margin-left: -50%;
+        width: 75%;
+        left: 100%;
+        text-align: center;
+    }
+
+    footer {
+        padding: 16px 0;
     }
 }
 
