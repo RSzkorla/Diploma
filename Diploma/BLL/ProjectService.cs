@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Diploma.Database;
 using Diploma.Models;
+using System.Data.SqlTypes;
 
 namespace Diploma.BLL
 {
@@ -103,7 +104,7 @@ namespace Diploma.BLL
         {
           var project = context.ListOfProjects.SingleOrDefault(x => x.Id == id);
           var tastService = new ProjectTaskService();
-          var listOfUndoneTasks = tastService.GetAllByProject(id).Where(x => x.EndDate == new DateTime()).ToList();
+          var listOfUndoneTasks = tastService.GetAllByProject(id).Where(x => x.EndDate == (DateTime)SqlDateTime.MinValue).ToList();
           return new UndoneTaskPerProject() {Project = project, UndoneProjectTasks = listOfUndoneTasks};
         }
 

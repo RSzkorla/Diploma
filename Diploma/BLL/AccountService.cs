@@ -5,6 +5,7 @@ using Diploma.Security;
 using Diploma.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Web;
 
@@ -72,6 +73,29 @@ namespace Diploma.BLL
                 db.SaveChanges();
             }
         }
-    }
 
+        public List<ProjectTask> GetUndoneUserTasks(string userEmail)
+        {
+            using (DiplomaDBContext db = new DiplomaDBContext())
+            {
+                User currentUser = db.ListOfUsers.Where(x => x.Email == userEmail).FirstOrDefault();
+
+                var userProjects = currentUser.ListOfProjects.Where(x => x.EndDate == (DateTime)SqlDateTime.MinValue).ToList();
+
+                var userTasks = new List<ProjectTask>();
+
+                foreach (var project in userProjects)
+                {
+                    foreach (var task in project.ListOfProjectTasks)
+                    {
+                        userTasks.Add(task);
+                    }
+                }
+
+                return userTasks;
+
+            }
+        }
+
+    }
 }

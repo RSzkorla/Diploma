@@ -5,6 +5,8 @@ using Diploma.Models;
 using Diploma.Security;
 using Diploma.ViewModels;
 using System;
+using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -15,7 +17,14 @@ namespace Diploma.Controllers
         private DiplomaDBContext db = new DiplomaDBContext();
 
         private readonly IAccountService service;
-        public UserController() => service = new AccountService();
+        private readonly IProjectService projectService;
+
+        public UserController()
+        {
+            service = new AccountService();
+            projectService = new ProjectService();
+
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -89,7 +98,7 @@ namespace Diploma.Controllers
             if (ModelState.IsValid)
             {
                 service.ChangePassword(userEmail, user.Password);
-                return RedirectToAction("Index", "Home", new { message = $"{userEmail},{user.Password}"});
+                return RedirectToAction("Index", "Home", new { message = $"{userEmail},{user.Password}" });
             }
             else
             {
@@ -141,10 +150,13 @@ namespace Diploma.Controllers
         [AutorizationService]
         public ActionResult Dashboard(User user)
         {
-                string eMail = Session["user"].ToString();
-                User currentUser = db.ListOfUsers.Where(x => x.Email == eMail).FirstOrDefault();
-                ViewBag.User = currentUser;
-                return View();
+            string eMail = Session["user"].ToString();
+            User currentUser = db.ListOfUsers.Where(x => x.Email == eMail).FirstOrDefault();
+            ViewBag.User = currentUser;
+
+            ViewBag.ListOfTasks = service.GetUndoneUserTasks(currentUser.Email);
+
+            return View();
         }
 
         //bez bazy
