@@ -11,9 +11,6 @@ namespace Diploma.BLL
         void ChangePassword(string userEmail, string newPassword);
         User GetByKey(string userEmail);
         void Register(UserRegistrationVM user);
-        List<ProjectTask> GetUndoneUserTasks(string userEmail);
-        List<ProjectTask> GetFailedTasks(string userEmail);
-
 
     }
 }

@@ -156,7 +156,7 @@ namespace Diploma.Controllers
 
             ViewBag.ListOfProjects = currentUser.ListOfProjects;
             ViewBag.ListOfTasks = projectService.GetAllUndoneTasksByUser(currentUser.Email);
-            //ViewBag.FailedTasks = /*service.GetFailedTasks(currentUser.Email);*/
+            ViewBag.FailedTasks = projectService.GetAllFailedTasksByUser(currentUser.Email);
 
             return View();
         }

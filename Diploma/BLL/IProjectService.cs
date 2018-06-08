@@ -17,5 +17,8 @@ namespace Diploma.BLL
         IEnumerable<Project> GetAllByUserId(string userEmail);
         IEnumerable<UndoneTaskPerProject> GetAllUndoneTasksByUser(string userEmail);
         UndoneTaskPerProject GetUndoneTasks(Guid id);
+        IEnumerable<UndoneTaskPerProject> GetAllFailedTasksByUser(string userEmail);
+        UndoneTaskPerProject GetFailedTasks(Guid id);
+
     }
 }
