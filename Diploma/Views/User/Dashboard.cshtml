@@ -34,32 +34,34 @@
         Html.RenderPartial("_AddingProjectModal");
     }
 </section>
-
-<div class="reminder-container">
-    <div class="reminder-todo">
-        <h4>
-            Rzeczy do zrobienia:
-        </h4>
-        <div class="reminder-todo-container">
-            <!--foreach-->
-            @foreach (var item in @ViewBag.ListOfTasks)
-            {
-                foreach (var item2 in item.UndoneProjectTasks)
+<section class="body-content">
+    <div class="reminder-container">
+        <div class="reminder-todo">
+            <h4>
+                Pozostałe zadania do wykonania w Twoich projektach:
+            </h4>
+            <div class="reminder-todo-container">
+                <!--foreach-->
+                @foreach (var item in @ViewBag.ListOfTasks)
                 {
-                    <div class="projects-container-element">
-                        <p>Projekt: @item.Project.Title</p>
-                        <p>Tytuł: @item2.Title</p>
-                        <p>Opis: @item2.Description</p>
-                        <p>Deadline: @item2.DeadLine.ToString("dd.MM.yyyy")</p>
-                    </div>
+                    foreach (var item2 in item.UndoneProjectTasks)
+                    {
+                        <div class="projects-container-element">
+                            <p>Projekt: @item.Project.Title</p>
+                            <p>Tytuł: @item2.Title</p>
+                            <p>Opis: @item2.Description</p>
+                            <p>Deadline: @item2.DeadLine.ToString("dd.MM.yyyy")</p>
+                        </div>
+                    }
                 }
-            }
+            </div>
+        </div>
+        <div class="reminder-stats">
+
         </div>
     </div>
-    <div class="reminder-stats">
+</section>
 
-    </div>
-</div>
 
 <section class="protip-slider">
 

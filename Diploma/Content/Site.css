@@ -490,3 +490,13 @@ footer {
     width: 50%;
     margin: 0 auto;
 }
+
+/*ASIDE*/
+
+aside.project-stats {
+    background: red;
+    width: 450px;
+    position: fixed;
+    right: 32px;
+    top:70px;
+}
