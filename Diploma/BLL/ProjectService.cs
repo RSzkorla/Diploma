@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Diploma.Database;
 using Diploma.Models;
+using System.Data.SqlTypes;
 
 namespace Diploma.BLL
 {
@@ -16,8 +17,8 @@ namespace Diploma.BLL
                 var prom = context.ListOfPromos.Where(x => x.Id == promo.Id).FirstOrDefault();
                 if (prom == null)
                 {
-                        context.ListOfPromos.Add(promo);
-                        context.SaveChanges();
+                    context.ListOfPromos.Add(promo);
+                    context.SaveChanges();
                 }
 
                 context.ListOfProjects.Add(project);
@@ -50,12 +51,12 @@ namespace Diploma.BLL
             {
                 var proj = context.ListOfProjects.Where(x => x.Id == id).FirstOrDefault();
                 var taskList = context.ListOfProjects.Where(x => x.Id == id).FirstOrDefault().ListOfProjectTasks;
-                var user = context.ListOfUsers.Where(x => x.Email==userEmail).FirstOrDefault();
+                var user = context.ListOfUsers.Where(x => x.Email == userEmail).FirstOrDefault();
 
                 if (user != null)
                 {
                     proj.Promo = null;
-                    
+
                     if (taskList != null)
                     {
                         context.ListOfProjectTasks.RemoveRange(taskList);
@@ -97,29 +98,57 @@ namespace Diploma.BLL
             }
         }
 
-      public UndoneTaskPerProject GetUndoneTasks(Guid id)
-      {
-        using (var context = new DiplomaDBContext())
+        public UndoneTaskPerProject GetFailedTasks(Guid id)
         {
-          var project = context.ListOfProjects.SingleOrDefault(x => x.Id == id);
-          var tastService = new ProjectTaskService();
-          var listOfUndoneTasks = tastService.GetAllByProject(id).Where(x => x.EndDate == new DateTime()).ToList();
-          return new UndoneTaskPerProject() {Project = project, UndoneProjectTasks = listOfUndoneTasks};
+            using (var context = new DiplomaDBContext())
+            {
+                var project = context.ListOfProjects.SingleOrDefault(x => x.Id == id);
+                var tastService = new ProjectTaskService();
+                var listOfUndoneTasks = tastService.GetAllByProject(id).Where(x => x.EndDate == (DateTime)SqlDateTime.MinValue
+                &&  DateTime.Compare(x.DeadLine.Date,DateTime.Now) <= 0).ToList();
+                return new UndoneTaskPerProject() { Project = project, UndoneProjectTasks = listOfUndoneTasks };
+            }
+
         }
 
-      }
 
-      public IEnumerable<UndoneTaskPerProject> GetAllUndoneTasksByUser(string userEmail)
-      {
-        using (var context = new DiplomaDBContext())
+        public IEnumerable<UndoneTaskPerProject> GetAllFailedTasksByUser(string userEmail)
         {
-          var user = context.ListOfUsers.SingleOrDefault(x => x.Email == userEmail);
-          if (user != null)
-            foreach (var project in user.ListOfProjects)
+            using (var context = new DiplomaDBContext())
             {
-              yield return GetUndoneTasks(project.Id);
+                var user = context.ListOfUsers.SingleOrDefault(x => x.Email == userEmail);
+                if (user != null)
+                    foreach (var project in user.ListOfProjects)
+                    {
+                            yield return GetFailedTasks(project.Id);
+                    }
+            }
+
+        }
+
+        public UndoneTaskPerProject GetUndoneTasks(Guid id)
+        {
+            using (var context = new DiplomaDBContext())
+            {
+                var project = context.ListOfProjects.SingleOrDefault(x => x.Id == id);
+                var tastService = new ProjectTaskService();
+                var listOfUndoneTasks = tastService.GetAllByProject(id).Where(x => x.EndDate == (DateTime)SqlDateTime.MinValue).ToList();
+                return new UndoneTaskPerProject() { Project = project, UndoneProjectTasks = listOfUndoneTasks };
+            }
+
+        }
+
+        public IEnumerable<UndoneTaskPerProject> GetAllUndoneTasksByUser(string userEmail)
+        {
+            using (var context = new DiplomaDBContext())
+            {
+                var user = context.ListOfUsers.SingleOrDefault(x => x.Email == userEmail);
+                if (user != null)
+                    foreach (var project in user.ListOfProjects)
+                    {
+                        yield return GetUndoneTasks(project.Id);
+                    }
             }
         }
-      }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Diploma.Models;
 using Diploma.ViewModels;
+using System.Collections.Generic;
 
 namespace Diploma.BLL
 {
@@ -10,5 +11,6 @@ namespace Diploma.BLL
         void ChangePassword(string userEmail, string newPassword);
         User GetByKey(string userEmail);
         void Register(UserRegistrationVM user);
+
     }
 }

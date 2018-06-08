@@ -5,6 +5,7 @@ using Diploma.Security;
 using Diploma.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Web;
 
@@ -72,6 +73,6 @@ namespace Diploma.BLL
                 db.SaveChanges();
             }
         }
-    }
 
+    }
 }
