@@ -80,7 +80,7 @@ namespace Diploma.BLL
             {
                 User currentUser = db.ListOfUsers.Where(x => x.Email == userEmail).FirstOrDefault();
 
-                var userProjects = currentUser.ListOfProjects.Where(x => x.EndDate == (DateTime)SqlDateTime.MinValue).ToList();
+                var userProjects = currentUser.ListOfProjects.ToList();
 
                 var userTasks = new List<ProjectTask>();
 
@@ -88,14 +88,46 @@ namespace Diploma.BLL
                 {
                     foreach (var task in project.ListOfProjectTasks)
                     {
+                        if (task.EndDate == (DateTime)SqlDateTime.MinValue)
+                            userTasks.Add(task);
+                    }
+                }
+
+                userTasks.Sort((x, y) => DateTime.Compare(x.DeadLine, y.DeadLine));
+
+
+                return userTasks;
+            }
+        }
+
+        public List<ProjectTask> GetFailedTasks(string userEmail)
+        {
+            var compareDate = DateTime.Parse("12/12/2012 00:00:00");
+            using (DiplomaDBContext db = new DiplomaDBContext())
+            {
+                User currentUser = db.ListOfUsers.Where(x => x.Email == userEmail).FirstOrDefault();
+
+                var userProjects = currentUser.ListOfProjects.ToList();
+
+                var userTasks = new List<ProjectTask>();
+
+                foreach (var project in userProjects)
+                {
+                    foreach (var task in project.ListOfProjectTasks)
+                    {
+                        if (DateTime.Now.Date.CompareTo(task.DeadLine.Date)>0)
                         userTasks.Add(task);
                     }
                 }
+
+                userTasks.Sort((x, y) => DateTime.Compare(x.DeadLine, y.DeadLine));
+
 
                 return userTasks;
 
             }
         }
+
 
     }
 }

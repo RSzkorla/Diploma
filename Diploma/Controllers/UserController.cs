@@ -154,7 +154,9 @@ namespace Diploma.Controllers
             User currentUser = db.ListOfUsers.Where(x => x.Email == eMail).FirstOrDefault();
             ViewBag.User = currentUser;
 
+            ViewBag.ListOfProjects = currentUser.ListOfProjects;
             ViewBag.ListOfTasks = service.GetUndoneUserTasks(currentUser.Email);
+            ViewBag.FailedTasks = service.GetFailedTasks(currentUser.Email);
 
             return View();
         }

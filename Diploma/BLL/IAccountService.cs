@@ -12,6 +12,8 @@ namespace Diploma.BLL
         User GetByKey(string userEmail);
         void Register(UserRegistrationVM user);
         List<ProjectTask> GetUndoneUserTasks(string userEmail);
+        List<ProjectTask> GetFailedTasks(string userEmail);
+
 
     }
 }
