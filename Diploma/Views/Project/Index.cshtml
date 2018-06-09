@@ -6,13 +6,17 @@
 <section class="body-content">
     @foreach (var item in ViewBag.Tasks)
     {
-       
+
         <div class="projects-task-container">
             <p>Tytuł: @item.Title</p>
             <p>Opis: @item.Description</p>
             <p>Deadline: @item.DeadLine.ToString("dd.MM.yyyy")</p>
+            <button id="btnShowMailModal" class="btn btn-sm btn-default modal-button" data-toggle="modal" data-target="#MailModal">
+                Kontakt z promotorem
+                <i class="fas fa-envelope"></i>
+            </button>
         </div>
-       
+
     }
 
     <div class="action-buttons">
@@ -31,12 +35,13 @@
             <button class="btn btn-sm btn-default delete-project-button" type="submit">Usuń projekt</button>
         }
     </div>
-    <aside class="project-stats">
-        <p>
-            czesio
-        </p>
-    </aside>
-    
+    @* Na razie nie sugerujcie się tym
+        <aside class="project-stats">
+            <p>
+                czesio
+            </p>
+        </aside>
+    *@
     @{ Html.RenderPartial("_AddingTaskModal");}
 
 </section>
