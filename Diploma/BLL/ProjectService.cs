@@ -103,8 +103,8 @@ namespace Diploma.BLL
             using (var context = new DiplomaDBContext())
             {
                 var project = context.ListOfProjects.SingleOrDefault(x => x.Id == id);
-                var tastService = new ProjectTaskService();
-                var listOfUndoneTasks = tastService.GetAllByProject(id).Where(x => x.EndDate == (DateTime)SqlDateTime.MinValue
+                var taskService = new ProjectTaskService();
+                var listOfUndoneTasks = taskService.GetAllByProject(id).Where(x => x.EndDate == (DateTime)SqlDateTime.MinValue
                 &&  DateTime.Compare(x.DeadLine.Date,DateTime.Now) <= 0).ToList();
                 return new UndoneTaskPerProject() { Project = project, UndoneProjectTasks = listOfUndoneTasks };
             }
@@ -131,8 +131,8 @@ namespace Diploma.BLL
             using (var context = new DiplomaDBContext())
             {
                 var project = context.ListOfProjects.SingleOrDefault(x => x.Id == id);
-                var tastService = new ProjectTaskService();
-                var listOfUndoneTasks = tastService.GetAllByProject(id).Where(x => x.EndDate == (DateTime)SqlDateTime.MinValue).ToList();
+                var taskService = new ProjectTaskService();
+                var listOfUndoneTasks = taskService.GetAllByProject(id).Where(x => x.EndDate == (DateTime)SqlDateTime.MinValue).ToList();
                 return new UndoneTaskPerProject() { Project = project, UndoneProjectTasks = listOfUndoneTasks };
             }
 
@@ -150,5 +150,24 @@ namespace Diploma.BLL
                     }
             }
         }
+
+
+      public int[] GetStatisticsDoneUndoneFailedTasks(Guid projectId)
+      {
+        using (var context = new DiplomaDBContext())
+        {
+          var taskService = new ProjectTaskService();
+          var doneTasksCount = taskService
+            .GetAllByProject(projectId)
+            .Count(x => x.EndDate != (DateTime) SqlDateTime.MinValue);
+          var undoneTasksCount = taskService
+            .GetAllByProject(projectId)
+            .Count(x => x.EndDate == (DateTime)SqlDateTime.MinValue);
+          var failedTasksCount = taskService
+            .GetAllByProject(projectId)
+            .Count(x => x.DeadLine < DateTime.Today && x.EndDate == (DateTime)SqlDateTime.MinValue);
+          return new[] {doneTasksCount, undoneTasksCount, failedTasksCount};
+        }
+      }
     }
 }
