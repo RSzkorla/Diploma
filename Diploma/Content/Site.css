@@ -434,6 +434,22 @@ footer {
         font-size: 18px;
         font-weight: bold;
     }
+
+.task-action {
+    color: #f4a53d;
+    font-size: 24px;
+    width: 100%;
+    display: inline-block;
+}
+
+    .task-action * {
+        margin-right: 15%;
+    }
+
+    .task-action *:last-of-type {
+        margin-right: 0;
+    }
+
 @media(max-width: 768px) {
     .projects-container-element,
     .projects-task-container 
@@ -441,11 +457,29 @@ footer {
         display: block;
     }
 
+    
+
     .action-buttons form,
     .action-buttons button {
         margin: 0 auto 16px;
     }
 
+    .task-action {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        
+    }
+
+        .task-action * {
+            font-size: 36px;
+            margin: 0 auto;
+            display: block;
+            margin-bottom: 16px;
+        }
+            .task-action *:last-of-type {
+                margin: 0 auto;
+            }
 }
 @media(max-width: 480px) {
     .modal-button,
@@ -489,14 +523,4 @@ footer {
 .alert {
     width: 50%;
     margin: 0 auto;
-}
-
-/*ASIDE*/
-
-aside.project-stats {
-    background: red;
-    width: 450px;
-    position: fixed;
-    right: 32px;
-    top:70px;
 }
