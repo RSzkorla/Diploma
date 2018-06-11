@@ -21,18 +21,6 @@
 
     }
   
-  <div class="reminder-stats">
-    <div class="stats-done">
-      @ViewBag.Stats[0];
-    </div>
-    <div class="stats-undone">
-      @ViewBag.Stats[1];
-    </div>
-    <div class="stats-failed">
-      @ViewBag.Stats[2];
-    </div>
-  </div>
-
   <div class="action-buttons">
         <button id="btnShowModal" class="btn btn-sm btn-default modal-button" data-toggle="modal" data-target="#myModal">
             Dodaj Taska
@@ -49,13 +37,32 @@
             <button class="btn btn-sm btn-default delete-project-button" type="submit">Usuń projekt</button>
         }
     </div>
-    @* Na razie nie sugerujcie się tym
-        <aside class="project-stats">
-            <p>
-                czesio
-            </p>
-        </aside>
-    *@
+  <div class="reminder-stats">
+      <h4>
+          Statystyki projektu
+      </h4>
+      <div class="stats-done stats">
+          <i class="fas fa-check"></i>
+          <span>Zadania wykonane:</span>
+          <p>
+              @ViewBag.Stats[0]
+          </p>
+      </div>
+      <div class="stats-undone stats">
+          <i class="fas fa-clock"></i>
+          <span>Zadania niewykonane:</span>
+          <p>
+              @ViewBag.Stats[1]
+          </p>
+      </div>
+      <div class="stats-failed stats">
+          <i class="fas fa-times"></i>
+          <span>Zadania nieudane:</span>
+          <p>
+              @ViewBag.Stats[2]
+          </p>
+      </div>
+  </div>
     @{ Html.RenderPartial("_AddingTaskModal");}
 
 </section>

@@ -91,7 +91,7 @@ section {
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
-    height: 448px; /*24.04 TODO fix */
+    height: 448px;
     padding-top: 60px;
 }
     .homepage-slider .slider-content {
@@ -415,6 +415,28 @@ footer {
     display: block;
     margin-bottom: 16px;
 }
+/*STATS*/
+.reminder-stats {
+    background: #efe9e1;
+    width: 400px;
+    padding: 20px;
+    font-size: 18px;
+}
+    .reminder-stats h4 {
+        text-align: center;
+    }
+
+    .reminder-stats .fa-check,
+    .reminder-stats .fa-clock,
+    .reminder-stats .fa-times{
+        color: #f4a53d;
+        margin-right: 8px;
+        margin-top: 8px;
+        
+    }
+    .reminder-stats .stats * {
+        display: inline-block;
+    }
 
 /*SLIDER*/
 .protip-slider {
@@ -480,6 +502,16 @@ footer {
             .task-action *:last-of-type {
                 margin: 0 auto;
             }
+
+    .reminder-stats {
+        width: 75%;
+        margin: 0 auto;
+        padding: 8px;
+        font-size: 16px;
+    }
+        .reminder-stats .stats * {
+            display: inline-block;
+        }
 }
 @media(max-width: 480px) {
     .modal-button,
