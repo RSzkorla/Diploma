@@ -20,8 +20,20 @@
         </div>
 
     }
+  
+  <div class="reminder-stats">
+    <div class="stats-done">
+      @ViewBag.Stats[0];
+    </div>
+    <div class="stats-undone">
+      @ViewBag.Stats[1];
+    </div>
+    <div class="stats-failed">
+      @ViewBag.Stats[2];
+    </div>
+  </div>
 
-    <div class="action-buttons">
+  <div class="action-buttons">
         <button id="btnShowModal" class="btn btn-sm btn-default modal-button" data-toggle="modal" data-target="#myModal">
             Dodaj Taska
             <i class="fas fa-plus"></i>

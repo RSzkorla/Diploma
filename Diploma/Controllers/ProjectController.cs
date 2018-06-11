@@ -30,6 +30,7 @@ namespace Diploma.Controllers
             ViewBag.Project = project;
             ViewBag.Id = projectId;
             ViewBag.UserEmail = userEmail;
+            ViewBag.Stats = service.GetStatisticsDoneUndoneFailedTasks(projectId);
 
             var tasks = taskService.GetAllByProject(projectId);
             ViewBag.Tasks = tasks;

@@ -19,6 +19,6 @@ namespace Diploma.BLL
         UndoneTaskPerProject GetUndoneTasks(Guid id);
         IEnumerable<UndoneTaskPerProject> GetAllFailedTasksByUser(string userEmail);
         UndoneTaskPerProject GetFailedTasks(Guid id);
-
-    }
+        int[] GetStatisticsDoneUndoneFailedTasks(Guid projectId);
+  }
 }
