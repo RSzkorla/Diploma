@@ -1,4 +1,5 @@
 ﻿using Diploma.BLL;
+using Diploma.EmailService;
 using Diploma.Models;
 using Diploma.Security;
 using Diploma.ViewModels;
@@ -30,35 +31,59 @@ namespace Diploma.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var date = Convert.ToString($"{model.Day}/{model.Month}/{model.Year}");
-                    var deadline = DateTime.Parse(date);
-
-                    ProjectTask task = new ProjectTask()
+                    try
                     {
-                        Title = model.Title,
-                        Description = model.Description,
-                        StartDate = DateTime.Now,
-                        DeadLine = deadline,
-                        EndDate = (DateTime)SqlDateTime.MinValue
-                    };
+                        var date = Convert.ToString($"{model.Day}/{model.Month}/{model.Year}");
+                        var deadline = DateTime.Parse(date);
 
-                    service.Create(id, task);
+                        ProjectTask task = new ProjectTask()
+                        {
+                            Title = model.Title,
+                            Description = model.Description,
+                            StartDate = DateTime.Now,
+                            DeadLine = deadline,
+                            EndDate = (DateTime)SqlDateTime.MinValue
+                        };
 
-                    return RedirectToAction("Index", "Project", new { projectId = id, userEmail = userEmail });
+                        service.Create(id, task);
+
+                        return RedirectToAction("Index", "Project", new { projectId = id, userEmail = userEmail });
+                    }
+                    catch
+                    {
+
+                    }
+
                 }
             }
-            return RedirectToAction("Index", "Project", new { projectId = id, userEmail = userEmail });
+            return RedirectToAction("Index", "Project", new
+            {
+                projectId = id,
+                userEmail = userEmail
+            });
         }
 
-        [HttpPost]
-        public ActionResult DeleteTask(Guid projectId, Guid projectTaskId)
+        public ActionResult DeleteTask(Guid projectId, Guid projectTaskId, string userEmail)
         {
-            if(projectId != null && projectTaskId != null)
+            if (projectId != null && projectTaskId != null)
             {
                 service.Delete(projectId, projectTaskId);
             }
-            return View("../Project/Index");
+            return RedirectToAction("Index", "Project", new { projectId = projectId, userEmail = userEmail });
+        }
 
+        public ActionResult SendPromoEmail(Guid projectId, Guid projectTaskId, string userEmail, Guid promoId)
+        {
+            MailSender.BuildTaskEmailToPromo(userEmail, projectTaskId, promoId);
+            return RedirectToAction("Index", "Project", new { projectId = projectId, userEmail = userEmail });
+        }
+
+        public ActionResult MarkTaskAsDone(Guid projectId, Guid projectTaskId, string userEmail, Guid promoId)
+        {
+            var task = service.Get(projectTaskId);
+            task.EndDate = DateTime.Now;
+            service.Update(projectId, projectTaskId, task);
+            return RedirectToAction("Index", "Project", new { projectId = projectId, userEmail = userEmail });
         }
 
     }

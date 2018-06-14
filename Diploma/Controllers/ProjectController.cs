@@ -16,7 +16,6 @@ namespace Diploma.Controllers
         private readonly IProjectService service;
         private readonly IProjectTaskService taskService;
 
-
         public ProjectController()
         {
             service = new ProjectService();
@@ -28,11 +27,12 @@ namespace Diploma.Controllers
         {
             var project = service.GetById(projectId);
             ViewBag.Project = project;
+            ViewBag.Promo = project.Promo.Id;
             ViewBag.Id = projectId;
             ViewBag.UserEmail = userEmail;
             ViewBag.Stats = service.GetStatisticsDoneUndoneFailedTasks(projectId);
 
-            var tasks = taskService.GetAllByProject(projectId);
+            var tasks = taskService.GetFailedByProject(projectId);
             ViewBag.Tasks = tasks;
 
             return View();
@@ -44,26 +44,32 @@ namespace Diploma.Controllers
         {
             if (ModelState.IsValid)
             {
-                var promo = new Promo() { Name = model.PromoName, Email = model.PromoEmail };
-
-                var date = Convert.ToString($"{model.Day}/{model.Month}/{model.Year}");
-                var deadline = DateTime.Parse(date);
-
-                Project project = new Project()
+                try
                 {
-                    Title = model.Title,
-                    Description = model.Description,
-                    Promo = promo,
-                    StartDate = DateTime.Now,
-                    DeadLine = deadline,
-                    EndDate = (DateTime)SqlDateTime.MinValue,
+                    var promo = new Promo() { Name = model.PromoName, Email = model.PromoEmail };
+
+                    var date = Convert.ToString($"{model.Day}/{model.Month}/{model.Year}");
+                    var deadline = DateTime.Parse(date);
+
+                    Project project = new Project()
+                    {
+                        Title = model.Title,
+                        Description = model.Description,
+                        Promo = promo,
+                        StartDate = DateTime.Now,
+                        DeadLine = deadline,
+                        EndDate = (DateTime)SqlDateTime.MinValue,
 
 
-                    ListOfProjectTasks = new List<ProjectTask>()
-                };
+                        ListOfProjectTasks = new List<ProjectTask>()
+                    };
 
-                service.Create(project, promo, userEmail);
-                
+                    service.Create(project, promo, userEmail);
+                }
+                catch
+                {
+
+                }
             }
             return RedirectToAction("Dashboard", "User");
         }

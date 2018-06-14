@@ -46,7 +46,7 @@
                 {
                     foreach (var item2 in item.UndoneProjectTasks)
                     {
-                        <div class="projects-container-element">
+                        <div class="projects-container-element" style="position:relative">
                             <p>Projekt: @item.Project.Title</p>
                             <p>Tytuł: @item2.Title</p>
                             <p>Opis: @item2.Description</p>
@@ -54,6 +54,12 @@
                             <div class="task-action">
                                 <i class="fas fa-envelope"></i>
                             </div>
+                            @if (@item2.DeadLine < DateTime.Now)
+                            {
+                            <i class="fas fa-exclamation-circle fa-2x" style="position:absolute; right:8px; top:8px; color:red"></i>
+                            }
+
+
                         </div>
                     }
                 }

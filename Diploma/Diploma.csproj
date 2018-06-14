@@ -298,11 +298,11 @@
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Shared\_AddingTaskModal.cshtml" />
     <Content Include="Views\Shared\_AddingProjectModal.cshtml" />
+    <Content Include="Views\Task\DeleteTask.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\PromoService\" />
-    <Folder Include="Views\Task\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
