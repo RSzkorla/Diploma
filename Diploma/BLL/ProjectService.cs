@@ -5,6 +5,7 @@ using System.Web;
 using Diploma.Database;
 using Diploma.Models;
 using System.Data.SqlTypes;
+using System.Data.Entity;
 
 namespace Diploma.BLL
 {
@@ -75,7 +76,7 @@ namespace Diploma.BLL
         {
             using (var context = new DiplomaDBContext())
             {
-                return context.ListOfProjects.SingleOrDefault(x => x.Id == id); ;
+                return context.ListOfProjects.Where(x => x.Id == id).Include(x => x.Promo).FirstOrDefault();
             }
         }
 
@@ -105,7 +106,7 @@ namespace Diploma.BLL
                 var project = context.ListOfProjects.SingleOrDefault(x => x.Id == id);
                 var taskService = new ProjectTaskService();
                 var listOfUndoneTasks = taskService.GetAllByProject(id).Where(x => x.EndDate == (DateTime)SqlDateTime.MinValue
-                &&  DateTime.Compare(x.DeadLine.Date,DateTime.Now) <= 0).ToList();
+                && DateTime.Compare(x.DeadLine.Date, DateTime.Now) <= 0).OrderBy(x => x.DeadLine).ToList();
                 return new UndoneTaskPerProject() { Project = project, UndoneProjectTasks = listOfUndoneTasks };
             }
 
@@ -120,7 +121,7 @@ namespace Diploma.BLL
                 if (user != null)
                     foreach (var project in user.ListOfProjects)
                     {
-                            yield return GetFailedTasks(project.Id);
+                        yield return GetFailedTasks(project.Id);
                     }
             }
 
@@ -132,7 +133,7 @@ namespace Diploma.BLL
             {
                 var project = context.ListOfProjects.SingleOrDefault(x => x.Id == id);
                 var taskService = new ProjectTaskService();
-                var listOfUndoneTasks = taskService.GetAllByProject(id).Where(x => x.EndDate == (DateTime)SqlDateTime.MinValue).ToList();
+                var listOfUndoneTasks = taskService.GetAllByProject(id).Where(x => x.EndDate == (DateTime)SqlDateTime.MinValue).OrderBy(x => x.DeadLine).ToList();
                 return new UndoneTaskPerProject() { Project = project, UndoneProjectTasks = listOfUndoneTasks };
             }
 
@@ -152,22 +153,22 @@ namespace Diploma.BLL
         }
 
 
-      public int[] GetStatisticsDoneUndoneFailedTasks(Guid projectId)
-      {
-        using (var context = new DiplomaDBContext())
+        public int[] GetStatisticsDoneUndoneFailedTasks(Guid projectId)
         {
-          var taskService = new ProjectTaskService();
-          var doneTasksCount = taskService
-            .GetAllByProject(projectId)
-            .Count(x => x.EndDate != (DateTime) SqlDateTime.MinValue);
-          var undoneTasksCount = taskService
-            .GetAllByProject(projectId)
-            .Count(x => x.EndDate == (DateTime)SqlDateTime.MinValue);
-          var failedTasksCount = taskService
-            .GetAllByProject(projectId)
-            .Count(x => x.DeadLine < DateTime.Today && x.EndDate == (DateTime)SqlDateTime.MinValue);
-          return new[] {doneTasksCount, undoneTasksCount, failedTasksCount};
+            using (var context = new DiplomaDBContext())
+            {
+                var taskService = new ProjectTaskService();
+                var doneTasksCount = taskService
+                  .GetAllByProject(projectId)
+                  .Count(x => x.EndDate != (DateTime)SqlDateTime.MinValue);
+                var undoneTasksCount = taskService
+                  .GetAllByProject(projectId)
+                  .Count(x => x.EndDate == (DateTime)SqlDateTime.MinValue);
+                var failedTasksCount = taskService
+                  .GetAllByProject(projectId)
+                  .Count(x => x.DeadLine < DateTime.Today && x.EndDate == (DateTime)SqlDateTime.MinValue);
+                return new[] { doneTasksCount, undoneTasksCount, failedTasksCount };
+            }
         }
-      }
     }
 }
